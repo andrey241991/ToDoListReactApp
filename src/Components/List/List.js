@@ -7,13 +7,15 @@ class List extends Component {
     super(props);
 
     this.state = {
-      listOfTasks: this.props.listOfTasks
+      listOfTasks: this.props.listOfTasks,
+      edittedText: ""
     };
 
     this.setTaskChecked = this.setTaskChecked.bind(this);
-    // this.removeTask = this.removeTask.bind(this);
-    this.deleteTask = this.deleteTask.bind(this);
-    console.log("My list of tasks =" + this.props.listOfTasks);
+    this.removeTask = this.removeTask.bind(this);
+    this.editTask = this.editTask.bind(this);
+    this.handleEditChange = this.handleEditChange.bind(this);
+    this.saveTaskChanges = this.saveTaskChanges.bind(this);
   }
 
   setTaskChecked(item) {
@@ -21,30 +23,10 @@ class List extends Component {
     this.forceUpdate();
   }
 
-  // removeTask(item){
-  //   for (let value of this.props.listOfTasks) {
-  //     value.data = item.data;
-  //   }
-  //   this.props.fromParentChangeListOfTasks(this.props.listOfTasks);
-  // }
-
-  removeTask(item) {
-    console.log(this.state.listOfTasks);
-    this.setState({
-      listOfTasks: this.state.listOfTasks.filter(t => {
-        return t.data !== item.data;
-      })
-    });
-    this.props.fromParentChangeListOfTasks(this.state.listOfTasks);
-
-    console.log(this.state.listOfTasks);
-  }
-
-  deleteTask(itemTask) {
+  removeTask(itemTask) {
     let newTasks = [];
     for (let value of this.props.listOfTasks) {
       if (value !== itemTask) {
-        console.log("Delete selected add tonew Array = " + value.title);
         newTasks.push(value);
       }
     }
@@ -52,35 +34,52 @@ class List extends Component {
   }
 
   editTask(item) {
-    item.isEdit = true;   ///поменять тут
+    item.isEdit = !item.isEdit;
     this.forceUpdate();
+  }
+
+  handleEditChange(event) {
+    this.setState({
+      edittedText: event.target.value
+    });
+  }
+
+  saveTaskChanges(item) {
+    item.title = this.state.edittedText;
+    this.editTask(item);
   }
 
   render() {
     return (
       <ol className="List">
         {this.props.listOfTasks.map(item => {
-          if(item.isEdit){
+          if (item.isEdit) {
             return (
               console.log("MY LOG=" + this.props.listOfTasks),
               (
-                <div className={item.isCompleted ? "completed" : "not-completed"}>
+                <div
+                  className={item.isCompleted ? "completed" : "not-completed"}
+                >
                   <li
                     key={item.data}
                     className={item.isSelected ? "selected" : "not-selected"}
                   >
-                  <input onChange={this.handleInputChange} value={item.title}/>
-                    <button onClick={() => this.editTask(item)}>Save</button>
-                    <button>Cancel={onCa}</button>
+                    <input onChange={this.handleEditChange} />
+                    <button onClick={() => this.saveTaskChanges(item)}>
+                      Save
+                    </button>
+                    <button onClick={() => this.editTask(item)}>Cancel</button>
                   </li>
                 </div>
               )
             );
-          }else{
+          } else {
             return (
               console.log("MY LOG=" + this.props.listOfTasks),
               (
-                <div className={item.isCompleted ? "completed" : "not-completed"}>
+                <div
+                  className={item.isCompleted ? "completed" : "not-completed"}
+                >
                   <li
                     key={item.data}
                     className={item.isSelected ? "selected" : "not-selected"}
@@ -92,7 +91,9 @@ class List extends Component {
                     />
                     {item.title}
                     <button onClick={() => this.editTask(item)}>Edit</button>
-                    <button onClick={() => this.deleteTask(item)}>Remove</button>
+                    <button onClick={() => this.removeTask(item)}>
+                      Remove
+                    </button>
                     <button onClick={() => this.setTaskChecked(item)}>
                       Done
                     </button>
@@ -109,7 +110,6 @@ class List extends Component {
 
 export default List;
 
-
 // render() {
 //   return (
 //     <ol className="List">
@@ -117,9 +117,8 @@ export default List;
 //         if(item.isEdit){
 
 //         }else{
-          
-//         }
 
+//         }
 
 //         return (
 //           console.log("MY LOG=" + this.props.listOfTasks),

@@ -46,6 +46,7 @@ class App extends Component {
     return (
       <div className="App">
         <div>
+       
           <Header />
           <Input handlerFromParant={this.handleData} />
           <Selected
