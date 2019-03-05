@@ -1,0 +1,51 @@
+.Input-field {
+  width: 600px;
+  height: 30px;
+}
+
+.Item-element {
+  text-align: center;
+  width: 300px;
+  height: 30px;
+}
+
+button {
+  margin: 2px;
+}
+
+/* .List{
+    display: flex;
+    justify-content: center;
+    margin: 0, auto;
+  } */
+
+.completed {
+  text-decoration: line-through;
+}
+
+.not-completed {
+  text-decoration: none;
+}
+
+
+.selected {	
+  background: #808080;
+}
+
+.not-selected {
+  background: #FEFEFE;
+}
+
+
+
+
+/* .completed .checkbox {
+  input:checked;
+  text-decoration: line-through;
+}
+
+.not-completed .checkbox {
+  text-decoration: none;
+} */
+
+
