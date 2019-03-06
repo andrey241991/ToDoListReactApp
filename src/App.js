@@ -8,43 +8,32 @@ import Selected from "./Components/Selected/Selected";
 import Filters from "./Components/Filters/Filters";
 
 class App extends Component {
-  constructor() {
-    super();
 
-    this.state = {
-      listOfTasks: [],
-      sortedListOfTasks: [],
-      showSortedTasks:false
-    };
+  state = {
+    listOfTasks: [],
+    sortedListOfTasks: [],
+    showSortedTasks:false
+  };
 
-    this.handleData = this.handleData.bind(this);
-    this.changeListOfTasks = this.changeListOfTasks.bind(this);
-    this.addSortedListOfTasks = this.addSortedListOfTasks.bind(this);
-    this.showNotSortedListOfTasks = this.showNotSortedListOfTasks.bind(this);
-  }
-
-  handleData(newTask) {
+  addNewTaskToList = (newTask) => {
     this.setState({
       listOfTasks: [...this.state.listOfTasks, newTask]
     });
   }
 
-
-
-
-  changeListOfTasks(newListOfTasks) {
+  changeListOfTasks = (newListOfTasks) => {
     this.setState({
       listOfTasks: newListOfTasks
     });
   }
 
-  showNotSortedListOfTasks(){
+  showNotSortedListOfTasks = () =>{
     this.setState({
       showSortedTasks:false
     })
   }
 
-  addSortedListOfTasks(sortedListOfTasks) {
+  addSortedListOfTasks = (sortedListOfTasks) => {
     this.setState({
       sortedListOfTasks: sortedListOfTasks
     });
@@ -66,7 +55,7 @@ class App extends Component {
       <div className="App">
         <div>
           <Header />
-          <Input handlerFromParant={this.handleData} />
+          <Input handlerFromParantAddNewTask={this.addNewTaskToList} />
           <Selected
             listOfTasks={this.state.listOfTasks}
             fromParentChangeListOfTasks={this.changeListOfTasks}
@@ -90,5 +79,3 @@ class App extends Component {
 
 export default App;
 
-
-//className={item.isCompleted ? "completed" : "not-completed"}

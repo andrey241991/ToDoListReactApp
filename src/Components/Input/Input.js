@@ -15,7 +15,7 @@ class Input extends Component {
       isSelected: false,
       isEdit: false
     };
-    this.props.handlerFromParant(newTask);
+    this.props.handlerFromParantAddNewTask(newTask);
   };
 
   handleInputChange = event => {
