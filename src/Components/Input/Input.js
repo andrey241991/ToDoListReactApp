@@ -14,7 +14,8 @@ class Input extends Component {
   }
 
   addNewTask(event) {
-    this.props.handlerFromParant(this.state.title, new Date());
+    this.props.handlerFromParant(this.state.title, + new Date());
+    console.log(+ new Date());
   }
 
   handleInputChange(event) {
@@ -24,7 +25,7 @@ class Input extends Component {
   render() {
     return (
       <div className="Input">
-        <input className="Input-field" onChange={this.handleInputChange} />
+        <input className="Input-field" maxLength="40" onChange={this.handleInputChange} />
         <button className="Button-add" onClick={this.addNewTask}>
           ADD
         </button>
@@ -34,13 +35,3 @@ class Input extends Component {
 }
 
 export default Input;
-
-// this.state = {
-//   task: {
-//     title: "",
-//     date: "",
-//     isActive: true,
-//     isCompleted: false,
-//     isSelected: false
-//   }
-// };

@@ -3,6 +3,19 @@
   justify-content: center;
   margin: 0, auto;
 }
+
+
+.ListAndSortParent{
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+
+/* display: flex;
+  justify-content: center;
+  height: 100%; */
+
 /* 
 .App {
   text-align: center;

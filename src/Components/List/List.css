@@ -36,7 +36,26 @@ button {
   background: #FEFEFE;
 }
 
+.List {
+  flex-basis: 60%;
+}
 
+li{
+  box-sizing: content-box;
+  border: gray solid 1px;
+  padding: 5px;
+  margin: 2px;
+}
+
+
+.list-button{
+  float: right;
+  align-items: rigth;
+}
+
+.list-edit-input{
+  width: 60%;
+}
 
 
 

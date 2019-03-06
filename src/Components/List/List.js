@@ -64,11 +64,13 @@ class List extends Component {
                     key={item.data}
                     className={item.isSelected ? "selected" : "not-selected"}
                   >
-                    <input onChange={this.handleEditChange} />
+                    <input className="list-edit-input" maxLength="40" onChange={this.handleEditChange} />
+                    <div className="list-button">
                     <button onClick={() => this.saveTaskChanges(item)}>
                       Save
                     </button>
                     <button onClick={() => this.editTask(item)}>Cancel</button>
+                    </div>
                   </li>
                 </div>
               )
@@ -90,6 +92,7 @@ class List extends Component {
                       onClick={() => this.setTaskChecked(item)}
                     />
                     {item.title}
+                    <div className="list-button">
                     <button onClick={() => this.editTask(item)}>Edit</button>
                     <button onClick={() => this.removeTask(item)}>
                       Remove
@@ -97,6 +100,7 @@ class List extends Component {
                     <button onClick={() => this.setTaskChecked(item)}>
                       Done
                     </button>
+                    </div>
                   </li>
                 </div>
               )
@@ -109,42 +113,3 @@ class List extends Component {
 }
 
 export default List;
-
-// render() {
-//   return (
-//     <ol className="List">
-//       {this.props.listOfTasks.map(item => {
-//         if(item.isEdit){
-
-//         }else{
-
-//         }
-
-//         return (
-//           console.log("MY LOG=" + this.props.listOfTasks),
-//           (
-//             <div className={item.isCompleted ? "completed" : "not-completed"}>
-//               <li
-//                 key={item.data}
-//                 className={item.isSelected ? "selected" : "not-selected"}
-//               >
-//                 <input
-//                   className="checkbox"
-//                   type="checkbox"
-//                   onClick={() => this.setTaskChecked(item)}
-//                 />
-//                 {item.title}
-//                 <button onClick={(item.isEdit = true)}>Edit</button>
-//                 <button onClick={() => this.deleteTask(item)}>Remove</button>
-//                 <button onClick={() => this.setTaskChecked(item)}>
-//                   Done
-//                 </button>
-//               </li>
-//             </div>
-//           )
-//         );
-//       })}
-//     </ol>
-//   );
-// }
-// }
