@@ -1,25 +1,32 @@
 import React, { Component } from "react";
 
 class Selected extends Component {
-  checkAllTasks = () => {
-    for (let value of this.props.listOfTasks) {
-      value.isSelected = true;
-    }
-    this.props.fromParentChangeListOfTasks(this.props.listOfTasks);
-  };
+  
+  // checkAllTasks = () => {
+  //   for (let value of this.props.listOfTasks) {
+  //     value.isSelected = true;
+  //   }
+  //   this.props.fromParentChangeListOfTasks(this.props.listOfTasks);
+  // };
 
-  unCheckAllTasks = () => {
+  // unCheckAllTasks = () => {
+  //   for (let value of this.props.listOfTasks) {
+  //     value.isSelected = false;
+  //   }
+  //   this.props.fromParentChangeListOfTasks(this.props.listOfTasks);
+  // };
+
+  setChecked = (checked) => {
     for (let value of this.props.listOfTasks) {
-      value.isSelected = false;
+      value.isSelected = checked;
     }
     this.props.fromParentChangeListOfTasks(this.props.listOfTasks);
-  };
+  }
 
   deleteSelected = () => {
     let newTasks = [];
     for (let value of this.props.listOfTasks) {
       if (!value.isSelected) {
-        console.log("Delete selected add tonew Array = " + value.title);
         newTasks.push(value);
       }
     }
@@ -29,8 +36,8 @@ class Selected extends Component {
   render() {
     return (
       <div className="Selected">
-        <button onClick={this.checkAllTasks}>CHECK ALL</button>
-        <button onClick={this.unCheckAllTasks}>UNCHECK ALL</button>
+        <button onClick={()=> this.setChecked(true)}>CHECK ALL</button>
+        <button onClick={()=> this.setChecked(false)}>UNCHECK ALL</button>
         <button onClick={this.deleteSelected}>DELETE SELECTED</button>
       </div>
     );

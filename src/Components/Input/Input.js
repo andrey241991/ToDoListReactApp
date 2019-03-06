@@ -2,30 +2,34 @@ import React, { Component } from "react";
 import "./Input.css";
 
 class Input extends Component {
-  constructor() {
-    super();
+  state = {
+    title: ""
+  };
 
-    this.state = {
-      title: ""
+  addNewTask = () => {
+    let newTask = {
+      title: this.state.title,
+      data: +new Date(),
+      isActive: true,
+      isCompleted: false,
+      isSelected: false,
+      isEdit: false
     };
+    this.props.handlerFromParant(newTask);
+  };
 
-    this.addNewTask = this.addNewTask.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  addNewTask(event) {
-    this.props.handlerFromParant(this.state.title, + new Date());
-    console.log(+ new Date());
-  }
-
-  handleInputChange(event) {
+  handleInputChange = event => {
     this.setState({ title: event.target.value });
-  }
+  };
 
   render() {
     return (
       <div className="Input">
-        <input className="Input-field" maxLength="40" onChange={this.handleInputChange} />
+        <input
+          className="Input-field"
+          maxLength="40"
+          onChange={this.handleInputChange}
+        />
         <button className="Button-add" onClick={this.addNewTask}>
           ADD
         </button>

@@ -23,24 +23,14 @@ class App extends Component {
     this.showNotSortedListOfTasks = this.showNotSortedListOfTasks.bind(this);
   }
 
-  handleData(title, data) {
-    console.log("DATA =" + data)
-    let newTask = {
-      title,
-      data,
-      isActive: true,
-      isCompleted: false,
-      isSelected: false,
-      isEdit: false
-    };
-
+  handleData(newTask) {
     this.setState({
       listOfTasks: [...this.state.listOfTasks, newTask]
     });
-
-    console.log("newTask = " + newTask.title + newTask.date + newTask.isActive);
-    console.log("list with tasks = " + this.state.listOfTasks.length);
   }
+
+
+
 
   changeListOfTasks(newListOfTasks) {
     this.setState({
