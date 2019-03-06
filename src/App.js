@@ -6,6 +6,7 @@ import Input from "./Components/Input/Input";
 import List from "./Components/List/List";
 import Selected from "./Components/Selected/Selected";
 import Filters from "./Components/Filters/Filters";
+import Pagination from "./Components/Pagination/Pagination";
 
 class App extends Component {
   constructor() {
@@ -92,6 +93,9 @@ class App extends Component {
               fromParentChangeListOfTasks={this.changeListOfTasks}
             />
           </div>
+          <Pagination
+          listOfTasks={listOfTasks}
+          />
         </div>
       </div>
     );
