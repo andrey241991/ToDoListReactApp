@@ -1,16 +1,10 @@
 import React, { Component } from "react";
 
 class Selected extends Component {
-  checkAllTasks = () => {
+  
+  setChecked = checked => {
     for (let value of this.props.listOfTasks) {
-      value.isSelected = true;
-    }
-    this.props.fromParentChangeListOfTasks(this.props.listOfTasks);
-  };
-
-  unCheckAllTasks = () => {
-    for (let value of this.props.listOfTasks) {
-      value.isSelected = false;
+      value.isSelected = checked;
     }
     this.props.fromParentChangeListOfTasks(this.props.listOfTasks);
   };
@@ -19,18 +13,17 @@ class Selected extends Component {
     let newTasks = [];
     for (let value of this.props.listOfTasks) {
       if (!value.isSelected) {
-        console.log("Delete selected add tonew Array = " + value.title);
         newTasks.push(value);
       }
     }
-    this.props.fromParentChangeListOfTasks(newTasks);   
+    this.props.fromParentChangeListOfTasks(newTasks);
   };
 
   render() {
     return (
       <div className="Selected">
-        <button onClick={this.checkAllTasks}>CHECK ALL</button>
-        <button onClick={this.unCheckAllTasks}>UNCHECK ALL</button>
+        <button onClick={() => this.setChecked(true)}>CHECK ALL</button>
+        <button onClick={() => this.setChecked(false)}>UNCHECK ALL</button>
         <button onClick={this.deleteSelected}>DELETE SELECTED</button>
       </div>
     );

@@ -9,53 +9,32 @@ import Filters from "./Components/Filters/Filters";
 import Pagination from "./Components/Pagination/Pagination";
 
 class App extends Component {
-  constructor() {
-    super();
 
-    this.state = {
-      listOfTasks: [],
-      sortedListOfTasks: [],
-      showSortedTasks:false
-    };
+  state = {
+    listOfTasks: [],
+    sortedListOfTasks: [],
+    showSortedTasks:false
+  };
 
-    this.handleData = this.handleData.bind(this);
-    this.changeListOfTasks = this.changeListOfTasks.bind(this);
-    this.addSortedListOfTasks = this.addSortedListOfTasks.bind(this);
-    this.showNotSortedListOfTasks = this.showNotSortedListOfTasks.bind(this);
-  }
-
-  handleData(title, data) {
-    console.log("DATA =" + data)
-    let newTask = {
-      title,
-      data,
-      isActive: true,
-      isCompleted: false,
-      isSelected: false,
-      isEdit: false
-    };
-
+  addNewTaskToList = (newTask) => {
     this.setState({
       listOfTasks: [...this.state.listOfTasks, newTask]
     });
-
-    console.log("newTask = " + newTask.title + newTask.date + newTask.isActive);
-    console.log("list with tasks = " + this.state.listOfTasks.length);
   }
 
-  changeListOfTasks(newListOfTasks) {
+  changeListOfTasks = (newListOfTasks) => {
     this.setState({
       listOfTasks: newListOfTasks
     });
   }
 
-  showNotSortedListOfTasks(){
+  showNotSortedListOfTasks = () =>{
     this.setState({
       showSortedTasks:false
     })
   }
 
-  addSortedListOfTasks(sortedListOfTasks) {
+  addSortedListOfTasks = (sortedListOfTasks) => {
     this.setState({
       sortedListOfTasks: sortedListOfTasks
     });
@@ -77,7 +56,7 @@ class App extends Component {
       <div className="App">
         <div>
           <Header />
-          <Input handlerFromParant={this.handleData} />
+          <Input handlerFromParantAddNewTask={this.addNewTaskToList} />
           <Selected
             listOfTasks={this.state.listOfTasks}
             fromParentChangeListOfTasks={this.changeListOfTasks}
@@ -104,5 +83,3 @@ class App extends Component {
 
 export default App;
 
-
-//className={item.isCompleted ? "completed" : "not-completed"}

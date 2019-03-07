@@ -7,20 +7,10 @@ class Filters extends Component {
     this.props.fromParentShowNotSortedListOfTasks();
   }
 
-  filterByActiveTasks = () => {
+  filterByCompletedAndActiveTasks = (isCompleted) => {
     let newTasks = [];
     for (let value of this.props.listOfTasks) {
-      if (!value.isCompleted) {
-        newTasks.push(value);
-      }
-    }
-    this.props.fromParentAddSortedListOfTasks(newTasks);
-  }
-
-  filterByComplitedTasks = () => {
-    let newTasks = [];
-    for (let value of this.props.listOfTasks) {
-      if (value.isCompleted) {
+      if (value.isCompleted === isCompleted) {
         newTasks.push(value);
       }
     }
@@ -39,8 +29,8 @@ class Filters extends Component {
     return (
       <div className="Filters">
         <div className = "filter-block" id="filter1" onClick={this.showAll}>SHOW ALL</div>
-        <div className = "filter-block" id="filter2" onClick={this.filterByActiveTasks}>SHOW ACTIVE</div>
-        <div className = "filter-block" id="filter3" onClick={this.filterByComplitedTasks}>SHOW COMPLETED</div>
+        <div className = "filter-block" id="filter2" onClick={()=>this.filterByCompletedAndActiveTasks(false)}>SHOW ACTIVE</div>
+        <div className = "filter-block" id="filter3" onClick={()=>this.filterByCompletedAndActiveTasks(true)}>SHOW COMPLETED</div>
         <div className = "filter-block" id="filter4" onClick={this.filterByTitle}>SORT BY A-Z</div>
         <div className = "filter-block" id="filter5" onClick={this.filterByOrigin}>SORT BY ORIGIN</div>
       </div>
