@@ -17,7 +17,7 @@ class List extends Component {
   removeTask = itemTask => {
     let newTasks = [];
     for (let value of this.props.listOfTasks) {
-      if (value !== itemTask) {
+      if (value.data !== itemTask.data) {
         newTasks.push(value);
       }
     }

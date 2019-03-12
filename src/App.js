@@ -21,49 +21,22 @@ class App extends Component {
     this.setState({
       listOfTasks: [...this.state.listOfTasks, newTask]
     });
+
+  //  this.setListOfTasksToShowOnOnePage();
   };
 
   changeListOfTasks = newListOfTasks => {
     this.setState({
       listOfTasks: newListOfTasks
-    });
+    })
+ //   this.setListOfTasksToShowOnOnePage();
   };
-
-  showNotSortedListOfTasks = () => {
-    this.setState({
-      showSortedTasks: false
-    });
-  };
-
-  addSortedListOfTasks = sortedListOfTasks => {
-    this.setState({
-      sortedListOfTasks: sortedListOfTasks
-    });
-
-    this.setState({
-      showSortedTasks: true
-    });
-  };
-
-  showTasksOnOnePage() {
-    if (this.state.listOfTasks.length > 10) {
-      this.setState({
-        showTasksOnOnePage: true
-      });
-    } else {
-      this.setState({
-        showTasksOnOnePage: false
-      });
-    }
-  }
-
-  notShowTasksOnOnePage() {}
 
   setCurrentPage = currentPage => {
     this.setState({
       currentPage: currentPage
     });
-    this.setListOfTasksToShowOnOnePage();
+ //   this.setListOfTasksToShowOnOnePage();
     console.log("setCurrentPage in parent =" + this.state.currentPage);
   };
 
@@ -76,10 +49,42 @@ class App extends Component {
         newListOfTasks.push(this.state.listOfTasks[i]);
       }
     }
-    this.setState({
-      listOfTasksToShowOnOnePage: newListOfTasks
-    });
+    // this.setState({
+    //   listOfTasksToShowOnOnePage: newListOfTasks
+    // });
+
+    return newListOfTasks;
   }
+
+  // showTasksOnOnePage() {
+  //   if (this.state.listOfTasks.length > 10) {
+  //     this.setState({
+  //       showTasksOnOnePage: true
+  //     });
+  //   } else {
+  //     this.setState({
+  //       showTasksOnOnePage: false
+  //     });
+  //   }
+  // }
+
+  // showNotSortedListOfTasks = () => {
+  //   this.setState({
+  //     showSortedTasks: false
+  //   });
+  // };
+
+  // addSortedListOfTasks = sortedListOfTasks => {
+  //   this.setState({
+  //     sortedListOfTasks: sortedListOfTasks
+  //   });
+
+  //   this.setState({
+  //     showSortedTasks: true
+  //   });
+  // };
+
+
 
   render() {
     let listOfTasks;
@@ -89,11 +94,11 @@ class App extends Component {
     //   listOfTasks = this.state.listOfTasks;
     // }
 
-    if (this.state.listOfTasks.length > 10) {
-      listOfTasks = this.state.listOfTasksToShowOnOnePage;
-    }else{
-      listOfTasks = this.state.listOfTasks;
-    }
+    // if (this.state.listOfTasks.length > 10) {
+    //   listOfTasks = this.state.listOfTasksToShowOnOnePage;
+    // }else{
+    //   listOfTasks = this.state.listOfTasks;
+    // }
 
     return (
       <div className="App">
@@ -111,7 +116,7 @@ class App extends Component {
               fromParentShowNotSortedListOfTasks={this.showNotSortedListOfTasks}
             />
             <List
-              listOfTasks={listOfTasks}
+              listOfTasks={this.setListOfTasksToShowOnOnePage()}
               fromParentChangeListOfTasks={this.changeListOfTasks}
             />
           </div>
