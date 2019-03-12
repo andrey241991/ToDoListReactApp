@@ -15,13 +15,15 @@ class List extends Component {
   };
 
   removeTask = itemTask => {
-    let newTasks = [];
-    for (let value of this.props.listOfTasks) {
-      if (value.data !== itemTask.data) {
-        newTasks.push(value);
-      }
-    }
-    this.props.fromParentChangeListOfTasks(newTasks);
+    // let newTasks = [];
+    // for (let value of this.props.listOfTasks) {
+    //   if (value.data !== itemTask.data) {
+    //     newTasks.push(value);
+    //   }
+    // }
+    // console.log("removeTask", newTasks);
+    // this.props.fromParentChangeListOfTasks(newTasks);
+    this.props.fromParentChangeListOfTasks(itemTask);
   };
 
   editTask = item => {
@@ -41,9 +43,8 @@ class List extends Component {
   };
 
      EditedListElement = (item) => (
-        <div className={item.isCompleted ? "completed" : "not-completed"}>
+        <div  key={item.data} className={item.isCompleted ? "completed" : "not-completed"}>
           <li
-            key={item.data}
             className={item.isSelected ? "selected" : "not-selected"}
           >
             <input
@@ -61,9 +62,8 @@ class List extends Component {
 
      ListElement = (item) => {
       return (
-        <div className={item.isCompleted ? "completed" : "not-completed"}>
+        <div key={item.data} className={item.isCompleted ? "completed" : "not-completed"}>
           <li
-            key={item.data}
             className={item.isSelected ? "selected" : "not-selected"}
           >
             <input
