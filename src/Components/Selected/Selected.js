@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Selected.css";
 
 class Selected extends Component {
   
@@ -21,10 +22,27 @@ class Selected extends Component {
 
   render() {
     return (
-      <div className="Selected">
-        <button onClick={() => this.setChecked(true)}>CHECK ALL</button>
-        <button onClick={() => this.setChecked(false)}>UNCHECK ALL</button>
-        <button onClick={this.deleteSelected}>DELETE SELECTED</button>
+      <div className="selected">
+        <div className="buttons_block"> 
+          <button
+          className="buttons_block__btncheck"
+          onClick={() => this.setChecked(true)}
+          >
+          CHECK ALL
+          </button>
+          <button 
+          className="buttons_block__btnuncheck"
+          onClick={() => this.setChecked(false)}
+          >
+          UNCHECK ALL
+          </button>
+          <button
+          className="buttons_block__btndelete"
+          onClick={this.deleteSelected}
+          >
+          DELETE SELECTED
+          </button>
+        </div>
       </div>
     );
   }

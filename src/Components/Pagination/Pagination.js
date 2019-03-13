@@ -20,14 +20,10 @@ class Pagination extends Component {
 
   render() {
     let pagesCount = [];
-    for (
-      let i = 0;
-      i < Math.ceil(this.props.listOfTasks.length / this.state.tasksPerPage);
-      i++
-    ) {
+    for ( let i = 0; i < Math.ceil(this.props.listOfTasks.length / this.state.tasksPerPage); i++) {
       pagesCount.push(
         <li
-          className="Pagination-element"
+          className="item"
           onClick={() => this.passPageToParent(i)}
         >
           {i}
@@ -37,12 +33,12 @@ class Pagination extends Component {
 
     if (this.props.listOfTasks.length > this.state.tasksPerPage) {
       return (
-        <div className="Pagination">
-          <h2>{pagesCount}</h2>
+        <div className="pagination">
+          <h2 className="item__title">{pagesCount}</h2>
         </div>
       );
     } else {
-      return <div className="Pagination" />;
+      return <div className="pagination" />;
     }
   }
 }

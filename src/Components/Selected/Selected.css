@@ -1,0 +1,11 @@
+.selected{
+display: flex;
+}
+
+.buttons_block{
+  background: #B0A8A8;
+}
+
+.buttons_block__btncheck{}
+.buttons_block__btnuncheck{}
+.buttons_block__btndelete{}
