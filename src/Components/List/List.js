@@ -15,7 +15,8 @@ class List extends Component {
   };
 
   removeTask = itemTask => {
-    this.props.fromParentChangeListOfTasks(itemTask);
+    const {fromParentChangeListOfTasks} = this.props;
+    fromParentChangeListOfTasks(itemTask);
   };
 
   editTask = item => {
@@ -116,11 +117,12 @@ class List extends Component {
    
 
     render() {
+    const {listOfTasks} = this.props;
     return (
       <ol 
       className="list"
       >
-        {this.props.listOfTasks.map(item => {
+        {listOfTasks.map(item => {
           if (item.isEdit) {
            return this.EditedListElement(item)
           } else {
