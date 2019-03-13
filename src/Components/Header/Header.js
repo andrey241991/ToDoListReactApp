@@ -3,8 +3,11 @@ import './Header.css';
 
 function Header() {
     return (
-          <header className="Header">
-            <h1 className="Header-text">TO-DO LIST</h1>
+          <header className="header">
+            <h1 className="header__title"
+            >
+            TO-DO LIST
+            </h1>
           </header>
       );
   }
