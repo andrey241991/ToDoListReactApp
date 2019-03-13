@@ -11,16 +11,18 @@ class Pagination extends Component {
   };
 
   passPageToParent = page => {
-    console.log("PAGE= " + page);
+    const {fromParentSetCurrentPage} = this.props;
     this.setState({
       currentPage: page
     });
-    this.props.fromParentSetCurrentPage(page);
+    fromParentSetCurrentPage(page);
   };
 
   render() {
+    const {listOfTasks} = this.props;
+    const {tasksPerPage} = this.state;
     let pagesCount = [];
-    for ( let i = 0; i < Math.ceil(this.props.listOfTasks.length / this.state.tasksPerPage); i++) {
+    for ( let i = 0; i < Math.ceil(listOfTasks.length / tasksPerPage); i++) {
       pagesCount.push(
         <li
           className="item"
@@ -31,14 +33,22 @@ class Pagination extends Component {
       );
     }
 
-    if (this.props.listOfTasks.length > this.state.tasksPerPage) {
+    if (listOfTasks.length > tasksPerPage) {
       return (
-        <div className="pagination">
-          <h2 className="item__title">{pagesCount}</h2>
-        </div>
-      );
+          <div 
+            className="pagination"
+            >
+              <h2 
+              className="item__title"
+              >
+              {pagesCount}
+              </h2>
+          </div>
+        );
     } else {
-      return <div className="pagination" />;
+      return <
+        div className="pagination" 
+        />;
     }
   }
 }
