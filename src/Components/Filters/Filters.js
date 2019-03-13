@@ -4,25 +4,29 @@ import './Filters.css';
 class Filters extends Component {
 
   showAll = () => {
-    this.props.fromParentShowNotSortedListOfTasks();
+    const{fromParentShowNotSortedListOfTasks} = this.props;
+    fromParentShowNotSortedListOfTasks();
   }
 
   filterByCompletedAndActiveTasks = (isCompleted) => {
+    const{fromParentAddSortedListOfTasks} = this.props;
     let newTasks = [];
     for (let value of this.props.listOfTasks) {
       if (value.isCompleted === isCompleted) {
         newTasks.push(value);
       }
     }
-    this.props.fromParentAddSortedListOfTasks(newTasks);
+    fromParentAddSortedListOfTasks(newTasks);
   }
 
   filterByTitle = () => {  
-    this.props.fromParentAddSortedListOfTasks(this.props.listOfTasks.sort((a, b) => a.title.localeCompare(b.title)));
+    const{fromParentAddSortedListOfTasks, listOfTasks} = this.props;
+    fromParentAddSortedListOfTasks(listOfTasks.sort((a, b) => a.title.localeCompare(b.title)));
   }
 
   filterByOrigin = () => {  
-    this.props.fromParentAddSortedListOfTasks(this.props.listOfTasks.sort((a, b) =>a.data - b.data));
+    const{fromParentAddSortedListOfTasks, listOfTasks} = this.props;
+    fromParentAddSortedListOfTasks(listOfTasks.sort((a, b) =>a.data - b.data));
   }
 
   render() {
