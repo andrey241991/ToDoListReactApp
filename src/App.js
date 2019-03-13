@@ -90,31 +90,35 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <div>
-          <Header />
-          <Input handlerFromParantAddNewTask={this.addNewTaskToList} />
-          <Selected
-            listOfTasks={listOfTasks}
-            fromParentChangeListOfTasks={this.changeListOfTasks}
-          />
-          <div className="ListAndSortParent">
-            <Filters
-              listOfTasks={this.setListOfTasksToShowOnOnePage()}
-              fromParentAddSortedListOfTasks={this.addSortedListOfTasks}
-              fromParentShowNotSortedListOfTasks={() => this.setSorted(false)}
-            />
-            <List
-              listOfTasks={listOfTasks}
-              fromParentChangeListOfTasks={this.removeTask}
-            />
+      <div className="app">
+          <div>
+              <Header />
+              <Input 
+              handlerFromParantAddNewTask={this.addNewTaskToList} 
+              />
+              <Selected
+                listOfTasks={listOfTasks}
+                fromParentChangeListOfTasks={this.changeListOfTasks}
+              />
+              <div 
+                  className="app_container_list_sort"
+                  >
+                    <Filters
+                      listOfTasks={this.setListOfTasksToShowOnOnePage()}
+                      fromParentAddSortedListOfTasks={this.addSortedListOfTasks}
+                      fromParentShowNotSortedListOfTasks={() => this.setSorted(false)}
+                    />
+                    <List
+                      listOfTasks={listOfTasks}
+                      fromParentChangeListOfTasks={this.removeTask}
+                    />
+              </div>
+              <Pagination
+                fromParentSetCurrentPage={this.setCurrentPage}
+                listOfTasks={this.state.listOfTasks}
+                currentPage={this.state.currentPage}
+              />
           </div>
-          <Pagination
-            fromParentSetCurrentPage={this.setCurrentPage}
-            listOfTasks={this.state.listOfTasks}
-            currentPage={this.state.currentPage}
-          />
-        </div>
       </div>
     );
   }

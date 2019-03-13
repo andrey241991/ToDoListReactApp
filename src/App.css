@@ -1,11 +1,11 @@
-.App {
+.app {
   display: flex;
   justify-content: center;
   margin: 0, auto;
 }
 
 
-.ListAndSortParent{
+.app_container_list_sort{
   display: flex;
   justify-content: center;
   height: 100%;
