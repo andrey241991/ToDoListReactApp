@@ -24,13 +24,15 @@ class Input extends Component {
 
   render() {
     return (
-      <div className="Input">
+      <div className="input">
         <input
-          className="Input-field"
+          className="input__input"
           maxLength="40"
           onChange={this.handleInputChange}
         />
-        <button className="Button-add" onClick={this.addNewTask}>
+        <button className="input__btnadd" 
+        onClick={this.addNewTask}
+        >
           ADD
         </button>
       </div>
