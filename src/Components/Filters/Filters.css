@@ -1,4 +1,4 @@
-.Filters {
+.filters {
   flex-basis: 40%;
 }
 
@@ -10,23 +10,23 @@
   margin: 4px;
 }
 
-#filter1 {
+.filter-block .filter1 {
   background: orangered;
 }
 
-#filter2 {
+.filter-block .filter2 {
   background: greenyellow;
 }
 
-#filter3 {
+.filter-block .filter3 {
   background: plum;
 }
 
-#filter4 {
+.filter-block .filter4 {
   background: paleturquoise;
 }
 
-#filter5 {
+.filter-block .filter5 {
   background: blueviolet;
 }
 

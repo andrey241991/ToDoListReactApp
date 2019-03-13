@@ -27,12 +27,31 @@ class Filters extends Component {
 
   render() {
     return (
-      <div className="Filters">
-        <div className = "filter-block" id="filter1" onClick={this.showAll}>SHOW ALL</div>
-        <div className = "filter-block" id="filter2" onClick={()=>this.filterByCompletedAndActiveTasks(false)}>SHOW ACTIVE</div>
-        <div className = "filter-block" id="filter3" onClick={()=>this.filterByCompletedAndActiveTasks(true)}>SHOW COMPLETED</div>
-        <div className = "filter-block" id="filter4" onClick={this.filterByTitle}>SORT BY A-Z</div>
-        <div className = "filter-block" id="filter5" onClick={this.filterByOrigin}>SORT BY ORIGIN</div>
+      <div className="filters">
+        <div className = "filter1"
+         onClick={this.showAll}
+         >
+         SHOW ALL
+         </div>
+        <div className = "filter2"
+         onClick={()=>this.filterByCompletedAndActiveTasks(false)}
+         >
+         SHOW ACTIVE
+         </div>
+        <div className = "filter3"
+         onClick={()=>this.filterByCompletedAndActiveTasks(true)}
+         >
+         SHOW COMPLETED
+         </div>
+        <div className = "filter4" 
+        onClick={this.filterByTitle}
+        >SORT BY A-Z
+        </div>
+        <div className = "filter5" 
+        onClick={this.filterByOrigin}
+        >
+        SORT BY ORIGIN
+        </div>
       </div>
     );
   }
