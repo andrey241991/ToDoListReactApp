@@ -18,8 +18,9 @@ class App extends Component {
   };
 
   addNewTaskToList = newTask => {
+    const {listOfTasks} = this.state;
     this.setState({
-      listOfTasks: [...this.state.listOfTasks, newTask]
+      listOfTasks: [...listOfTasks, newTask]
     });
   };
 
@@ -30,8 +31,9 @@ class App extends Component {
   };
 
   removeTask = itemForRemove => {
+    const {listOfTasks, currentPage} = this.state;
     let newTasks = [];
-    for (let value of this.state.listOfTasks) {
+    for (let value of listOfTasks) {
       if (value.data !== itemForRemove.data) {
         newTasks.push(value);
       }
@@ -42,7 +44,7 @@ class App extends Component {
 
     if (newTasks == 10) {
       this.setState({
-        currentPage: this.state.currentPage - 1
+        currentPage: currentPage - 1
       });
     }
   };
@@ -52,16 +54,16 @@ class App extends Component {
       currentPage: currentPage
     });
     this.setSorted(false);
-    console.log("setCurrentPage in parent =" + this.state.currentPage);
   };
 
   setListOfTasksToShowOnOnePage() {
-    let firstTask = this.state.currentPage * 10;
+    const {listOfTasks, currentPage} = this.state;
+    let firstTask = currentPage * 10;
     let lastTask = firstTask + 10;
     let newListOfTasks = [];
-    for (let i = 0; i < this.state.listOfTasks.length; i++) {
+    for (let i = 0; i < listOfTasks.length; i++) {
       if (i >= firstTask && i < lastTask) {
-        newListOfTasks.push(this.state.listOfTasks[i]);
+        newListOfTasks.push(listOfTasks[i]);
       }
     }
     return newListOfTasks;
@@ -81,10 +83,12 @@ class App extends Component {
   };
 
   render() {
+   const {currentPage, showSortedTasks, sortedListOfTasks} = this.state;
+
     console.log("render");
     let listOfTasks;
-    if (this.state.showSortedTasks) {
-      listOfTasks = this.state.sortedListOfTasks;
+    if (showSortedTasks) {
+      listOfTasks = sortedListOfTasks;
     } else {
       listOfTasks = this.setListOfTasksToShowOnOnePage();
     }
@@ -116,7 +120,7 @@ class App extends Component {
               <Pagination
                 fromParentSetCurrentPage={this.setCurrentPage}
                 listOfTasks={this.state.listOfTasks}
-                currentPage={this.state.currentPage}
+                currentPage={currentPage}
               />
           </div>
       </div>

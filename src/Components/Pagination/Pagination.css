@@ -1,5 +1,7 @@
 
-.item{
+.pagination{}
+
+.item__title{
     display: inline;
     padding: 4px;
 }

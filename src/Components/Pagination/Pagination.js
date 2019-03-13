@@ -25,7 +25,7 @@ class Pagination extends Component {
     for ( let i = 0; i < Math.ceil(listOfTasks.length / tasksPerPage); i++) {
       pagesCount.push(
         <li
-          className="item"
+          className="item__title"
           onClick={() => this.passPageToParent(i)}
         >
           {i}
@@ -35,20 +35,16 @@ class Pagination extends Component {
 
     if (listOfTasks.length > tasksPerPage) {
       return (
-          <div 
-            className="pagination"
-            >
-              <h2 
-              className="item__title"
-              >
-              {pagesCount}
-              </h2>
-          </div>
-        );
+        <div 
+        className="pagination"
+        >
+          <h2>
+          {pagesCount}
+          </h2>
+        </div>
+      );
     } else {
-      return <
-        div className="pagination" 
-        />;
+      return <div className="pagination" />;
     }
   }
 }
