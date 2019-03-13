@@ -4,20 +4,22 @@ import "./Selected.css";
 class Selected extends Component {
   
   setChecked = checked => {
-    for (let value of this.props.listOfTasks) {
+    const {fromParentChangeListOfTasks, listOfTasks} = this.props;
+    for (let value of listOfTasks) {
       value.isSelected = checked;
     }
-    this.props.fromParentChangeListOfTasks(this.props.listOfTasks);
+    fromParentChangeListOfTasks(this.props.listOfTasks);
   };
 
   deleteSelected = () => {
+    const {fromParentChangeListOfTasks, listOfTasks} = this.props;
     let newTasks = [];
-    for (let value of this.props.listOfTasks) {
+    for (let value of listOfTasks) {
       if (!value.isSelected) {
         newTasks.push(value);
       }
     }
-    this.props.fromParentChangeListOfTasks(newTasks);
+    fromParentChangeListOfTasks(newTasks);
   };
 
   render() {
