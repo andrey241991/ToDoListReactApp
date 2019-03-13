@@ -7,15 +7,17 @@ class Input extends Component {
   };
 
   addNewTask = () => {
+    const {handlerFromParantAddNewTask} = this.props;
+    const {title} = this.state;
     let newTask = {
-      title: this.state.title,
+      title: title,
       data: +new Date(),
       isActive: true,
       isCompleted: false,
       isSelected: false,
       isEdit: false
     };
-    this.props.handlerFromParantAddNewTask(newTask);
+    handlerFromParantAddNewTask(newTask);
   };
 
   handleInputChange = event => {
