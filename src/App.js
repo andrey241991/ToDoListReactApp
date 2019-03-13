@@ -124,7 +124,6 @@ class App extends Component {
             />
             <List
               listOfTasks={listOfTasks}
-             // fromParentChangeListOfTasks={this.changeListOfTasks}
               fromParentChangeListOfTasks={this.removeTask}
             />
           </div>
@@ -145,39 +144,3 @@ export default App;
 
 
 
-
-
-
-
-  // showTasksOnOnePage() {
-  //   if (this.state.listOfTasks.length > 10) {
-  //     this.setState({
-  //       showTasksOnOnePage: true
-  //     });
-  //   } else {
-  //     this.setState({
-  //       showTasksOnOnePage: false
-  //     });
-  //   }
-  // }
-
-  // showNotSortedListOfTasks = () => {
-  //   this.setState({
-  //     showSortedTasks: false
-  //   });
-  // };
-
-
-
-
-
-
-// addSortedListOfTasks = sortedListOfTasks => {
-//   this.setState({
-//     sortedListOfTasks: sortedListOfTasks
-//   });
-
-//   this.setState({
-//     showSortedTasks: true
-//   });
-// };
