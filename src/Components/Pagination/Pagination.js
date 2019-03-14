@@ -42,7 +42,10 @@ class Pagination extends Component {
     for ( let i = 0; i < Math.ceil(listOfTasks.length / tasksPerPage); i++) {
       pagesCount.push(
         <li
-          className="item__title"
+          className={currentPage === i
+          ? "item__title--checked"
+          : "item__title"
+          }   
           onClick={() => this.passPageToParent(i)}
         >
           {i}
