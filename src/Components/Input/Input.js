@@ -31,6 +31,12 @@ class Input extends Component {
           className="input__input"
           maxLength="40"
           onChange={this.handleInputChange}
+          onKeyPress={event => {
+            if (event.key === 'Enter') {
+              this.addNewTask();
+            }
+          }
+        }
         />
         <button className="input__btnadd" 
         onClick={this.addNewTask}
