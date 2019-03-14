@@ -11,6 +11,7 @@ class Pagination extends Component {
   };
 
   passPageToParent = page => {
+    console.log("page", page);
     const {fromParentSetCurrentPage} = this.props;
     this.setState({
       currentPage: page
@@ -18,9 +19,25 @@ class Pagination extends Component {
     fromParentSetCurrentPage(page);
   };
 
+  onChangePageClick = (buttonPressed, currentPage, pagesCount) => {
+    const {PREV_BUTTON_CLICK, NEXT_BUTTON_CLICK} = this.state;
+    switch(buttonPressed){
+      case PREV_BUTTON_CLICK:
+      if(currentPage>0 && currentPage <= pagesCount){
+        this.passPageToParent(--currentPage);
+      }
+      break;
+      case NEXT_BUTTON_CLICK:
+      if(currentPage>=0 && currentPage < pagesCount-1){
+        this.passPageToParent(++currentPage);
+      }
+      break;
+    }
+  };
+
   render() {
     const {listOfTasks} = this.props;
-    const {tasksPerPage} = this.state;
+    const {tasksPerPage, PREV_BUTTON_CLICK, NEXT_BUTTON_CLICK, currentPage} = this.state;
     let pagesCount = [];
     for ( let i = 0; i < Math.ceil(listOfTasks.length / tasksPerPage); i++) {
       pagesCount.push(
@@ -32,15 +49,34 @@ class Pagination extends Component {
         </li>
       );
     }
+    
 
     if (listOfTasks.length > tasksPerPage) {
       return (
         <div 
         className="pagination"
         >
+          <button 
+          className="item__btnprev"
+          onClick={()=>this.onChangePageClick(
+            PREV_BUTTON_CLICK,
+             currentPage, 
+             pagesCount.length)}
+          >
+          PREV
+          </button>
           <h2>
           {pagesCount}
           </h2>
+          <button
+           className="item__btnnext"
+           onClick={()=>this.onChangePageClick(
+             NEXT_BUTTON_CLICK,
+             currentPage,
+              pagesCount.length)}
+           >
+           NEXT
+           </button>
         </div>
       );
     } else {

@@ -1,10 +1,13 @@
 
 .input__input{
-  width: 600px;
-  height: 30px;
+  flex: 5;
 }
 
 .input__btnadd{
-  width: 100px;
-  height: 30px;
+  flex: 1;
+}
+
+.input__btnadd:hover{
+  flex: 1;
+  cursor: pointer;
 }

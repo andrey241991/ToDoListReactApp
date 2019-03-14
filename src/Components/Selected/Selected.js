@@ -25,21 +25,21 @@ class Selected extends Component {
   render() {
     return (
       <div className="selected">
-        <div className="buttons_block"> 
+        <div className="selected_block"> 
           <button
-          className="buttons_block__btncheck"
+          className="selected_block__btncheck"
           onClick={() => this.setChecked(true)}
           >
           CHECK ALL
           </button>
           <button 
-          className="buttons_block__btnuncheck"
+          className="selected_block__btnuncheck"
           onClick={() => this.setChecked(false)}
           >
           UNCHECK ALL
           </button>
           <button
-          className="buttons_block__btndelete"
+          className="selected_block__btndelete"
           onClick={this.deleteSelected}
           >
           DELETE SELECTED

@@ -1,11 +1,29 @@
-.selected{
-display: flex;
+.selected {}
+
+.selected_block {
+  width: 100%;
+  display: flex;
 }
 
-.buttons_block{
-  background: #B0A8A8;
+.selected_block__btncheck {
+  flex: 1;
+}
+.selected_block__btnuncheck {
+  flex: 1;
+}
+.selected_block__btndelete {
+  flex: 1;
 }
 
-.buttons_block__btncheck{}
-.buttons_block__btnuncheck{}
-.buttons_block__btndelete{}
+.selected_block__btncheck:hover {
+  flex: 1;
+  cursor: pointer;
+}
+.selected_block__btnuncheck:hover  {
+  flex: 1;
+  cursor: pointer;
+}
+.selected_block__btndelete:hover {
+  flex: 1;
+  cursor: pointer;
+}

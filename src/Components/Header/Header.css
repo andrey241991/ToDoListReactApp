@@ -1,11 +1,14 @@
 .header {
-  background: green;
-  width: 1200px;
+  width: 100%;
   height: 100px;
-  margin: 0 auto;
   background-color: #282c34;
+  display: flex;
+  justify-content: center;
 }
+
 .header__title{
+  align-self: center;
   color: darkgray;
-  padding: 30px;
+  font-size: 2.5em;
+  
 }

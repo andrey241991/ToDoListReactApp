@@ -1,7 +1,43 @@
 
-.pagination{}
+.pagination{
+    align-items: center;
+    display: flex; 
+    height: 40px;
+}
 
 .item__title{
     display: inline;
-    padding: 4px;
+} 
+
+.item__btnprev{
+    width: 50px;
+    height: 40px;
 }
+
+.item__btnnext{
+    width: 50px;
+    height: 40px;
+} 
+
+.item__title:hover{
+    display: inline;
+    cursor: pointer;
+} 
+
+.item__btnprev:hover{
+    width: 50px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.item__btnnext:hover{
+    width: 50px;
+    height: 40px;
+    cursor: pointer;
+} 
+
+
+
+
+
+

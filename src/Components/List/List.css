@@ -38,3 +38,35 @@ button {
 .item__input{
   width: 60%;
 }
+
+
+.buttons_block__editbtn{}
+
+.buttons_block__removebtn{}
+
+.buttons_block__donebtn{}
+
+.button_block__savebtn{}
+
+.button_block__cancelbtn{}
+
+
+.buttons_block__editbtn:hover{
+  cursor: pointer;
+}
+
+.buttons_block__removebtn:hover{
+  cursor: pointer;
+}
+
+.buttons_block__donebtn:hover{
+  cursor: pointer;
+}
+
+.button_block__savebtn:hover{
+  cursor: pointer;
+}
+
+.button_block__cancelbtn:hover{
+  cursor: pointer;
+}

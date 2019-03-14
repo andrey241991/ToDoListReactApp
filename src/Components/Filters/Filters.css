@@ -30,3 +30,30 @@
   background: blueviolet;
 }
 
+
+#filters_block__filter1:hover {
+  background: orangered;
+  cursor: pointer;
+}
+
+#filters_block__filter2:hover {
+  background: greenyellow;
+  cursor: pointer;
+}
+
+#filters_block__filter3:hover {
+  background: plum;
+  cursor: pointer;
+}
+
+#filters_block__filter4:hover {
+  background: paleturquoise;
+  cursor: pointer;
+}
+
+#filters_block__filter5:hover {
+  background: blueviolet;
+  cursor: pointer;
+}
+
+

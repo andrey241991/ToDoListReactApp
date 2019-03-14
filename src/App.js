@@ -18,7 +18,7 @@ class App extends Component {
   };
 
   addNewTaskToList = newTask => {
-    const {listOfTasks} = this.state;
+    const { listOfTasks } = this.state;
     this.setState({
       listOfTasks: [...listOfTasks, newTask]
     });
@@ -31,7 +31,7 @@ class App extends Component {
   };
 
   removeTask = itemForRemove => {
-    const {listOfTasks, currentPage} = this.state;
+    const { listOfTasks, currentPage } = this.state;
     let newTasks = [];
     for (let value of listOfTasks) {
       if (value.data !== itemForRemove.data) {
@@ -57,7 +57,7 @@ class App extends Component {
   };
 
   setListOfTasksToShowOnOnePage() {
-    const {listOfTasks, currentPage} = this.state;
+    const { listOfTasks, currentPage } = this.state;
     let firstTask = currentPage * 10;
     let lastTask = firstTask + 10;
     let newListOfTasks = [];
@@ -83,7 +83,7 @@ class App extends Component {
   };
 
   render() {
-   const {currentPage, showSortedTasks, sortedListOfTasks} = this.state;
+    const { currentPage, showSortedTasks, sortedListOfTasks } = this.state;
 
     console.log("render");
     let listOfTasks;
@@ -94,35 +94,54 @@ class App extends Component {
     }
 
     return (
-      <div className="app">
-          <div>
-              <Header />
-              <Input 
-              handlerFromParantAddNewTask={this.addNewTaskToList} 
-              />
-              <Selected
-                listOfTasks={listOfTasks}
-                fromParentChangeListOfTasks={this.changeListOfTasks}
-              />
-              <div 
-                  className="app_container_list_sort"
-                  >
-                    <Filters
-                      listOfTasks={this.setListOfTasksToShowOnOnePage()}
-                      fromParentAddSortedListOfTasks={this.addSortedListOfTasks}
-                      fromParentShowNotSortedListOfTasks={() => this.setSorted(false)}
-                    />
-                    <List
-                      listOfTasks={listOfTasks}
-                      fromParentChangeListOfTasks={this.removeTask}
-                    />
-              </div>
-              <Pagination
-                fromParentSetCurrentPage={this.setCurrentPage}
-                listOfTasks={this.state.listOfTasks}
-                currentPage={currentPage}
-              />
+      <div
+       className="app"
+       >
+        <Header 
+        className="header" 
+        />
+        <div
+         className="container"
+         >
+          <div
+           className="container_input_selected"
+           >
+            <Input
+              className="input"
+              handlerFromParantAddNewTask={this.addNewTaskToList}
+            />
+            <Selected
+              className="selected"
+              listOfTasks={listOfTasks}
+              fromParentChangeListOfTasks={this.changeListOfTasks}
+            />
           </div>
+          <div 
+          className="app_container"
+          >
+            <div 
+            className="app_container_item"
+            >
+              <Filters
+                className="filters"
+                listOfTasks={this.setListOfTasksToShowOnOnePage()}
+                fromParentAddSortedListOfTasks={this.addSortedListOfTasks}
+                fromParentShowNotSortedListOfTasks={() => this.setSorted(false)}
+              />
+              <List
+                className="list"
+                listOfTasks={listOfTasks}
+                fromParentChangeListOfTasks={this.removeTask}
+              />
+            </div>
+            <Pagination
+              className="pagination"
+              fromParentSetCurrentPage={this.setCurrentPage}
+              listOfTasks={this.state.listOfTasks}
+              currentPage={currentPage}
+            />
+          </div>
+        </div>
       </div>
     );
   }
