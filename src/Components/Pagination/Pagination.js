@@ -12,7 +12,7 @@ class Pagination extends Component {
 
   passPageToParent = page => {
     console.log("page", page);
-    const {fromParentSetCurrentPage} = this.props;
+    const { fromParentSetCurrentPage } = this.props;
     this.setState({
       currentPage: page
     });
@@ -20,70 +20,70 @@ class Pagination extends Component {
   };
 
   onChangePageClick = (buttonPressed, currentPage, pagesCount) => {
-    const {PREV_BUTTON_CLICK, NEXT_BUTTON_CLICK} = this.state;
-    switch(buttonPressed){
+    const { PREV_BUTTON_CLICK, NEXT_BUTTON_CLICK } = this.state;
+    switch (buttonPressed) {
       case PREV_BUTTON_CLICK:
-      if(currentPage>0 && currentPage <= pagesCount){
-        this.passPageToParent(--currentPage);
-      }
-      break;
+        if (currentPage > 0 && currentPage <= pagesCount) {
+          this.passPageToParent(--currentPage);
+        }
+        break;
       case NEXT_BUTTON_CLICK:
-      if(currentPage>=0 && currentPage < pagesCount-1){
-        this.passPageToParent(++currentPage);
-      }
-      break;
+        if (currentPage >= 0 && currentPage < pagesCount - 1) {
+          this.passPageToParent(++currentPage);
+        }
+        break;
     }
   };
 
   render() {
-    const {listOfTasks} = this.props;
-    const {tasksPerPage, PREV_BUTTON_CLICK, NEXT_BUTTON_CLICK, currentPage} = this.state;
+    const { listOfTasks } = this.props;
+    const {
+      tasksPerPage,
+      PREV_BUTTON_CLICK,
+      NEXT_BUTTON_CLICK,
+      currentPage
+    } = this.state;
     let pagesCount = [];
-    for ( let i = 0; i < Math.ceil(listOfTasks.length / tasksPerPage); i++) {
+    for (let i = 0; i < Math.ceil(listOfTasks.length / tasksPerPage); i++) {
       pagesCount.push(
-        <li
-          className={currentPage === i
-          ? "item__title--checked"
-          : "item__title"
-          }   
-          onClick={() => this.passPageToParent(i)}
+        <li className={currentPage === i ?
+          "item__title--checked" : 
+          "item__title"}
+           onClick={() => this.passPageToParent(i)}
         >
-          {i}
+            {i}
         </li>
       );
     }
     
-
     if (listOfTasks.length > tasksPerPage) {
       return (
-        <div 
-        className="pagination"
-        >
-          <button 
-          className="item__btnprev"
-          onClick={()=>this.onChangePageClick(
-            PREV_BUTTON_CLICK,
-             currentPage, 
-             pagesCount.length)}
-          >
-          PREV
-          </button>
-          <h2>
-          {pagesCount}
-          </h2>
-          <button
-           className="item__btnnext"
-           onClick={()=>this.onChangePageClick(
-             NEXT_BUTTON_CLICK,
-             currentPage,
-              pagesCount.length)}
-           >
-           NEXT
-           </button>
-        </div>
+        <section className="pagination">
+            <button
+                className="pagination__button-prev"
+                onClick={() =>
+                this.onChangePageClick(
+                PREV_BUTTON_CLICK,
+                currentPage,
+                pagesCount.length)}
+            >
+                PREV
+            </button>
+            <h2>{pagesCount}</h2>
+            <button
+                className="pagination__button-next"
+                onClick={() =>
+                this.onChangePageClick(
+                NEXT_BUTTON_CLICK,
+                currentPage,
+                pagesCount.length)}
+            >
+                NEXT
+            </button>
+        </section>
       );
     } else {
-      return <div className="pagination" />;
+      return <section className="pagination" />;
     }
   }
 }

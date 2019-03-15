@@ -3,11 +3,11 @@
   flex: 5;
 }
 
-.input__btnadd{
+.input__button-add{
   flex: 1;
 }
 
-.input__btnadd:hover{
+.input__button-add:hover{
   flex: 1;
   cursor: pointer;
 }

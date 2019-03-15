@@ -4,13 +4,22 @@
   flex-direction: column;
 }
 
-.app_container{
+.app_container_top{
+  height: 80px;
+  width: 50%;
+  margin-left: 25%;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+}
+
+.app_container_bottom{
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.app_container_item{
+.app_container_bottom__container{
   margin:10px;
   display: flex;
   height: 100%;
@@ -23,15 +32,6 @@
 .pagination{
   margin-left: 35%;
   flex: 1;
-}
-
-.container_input_selected{
-  height: 80px;
-  width: 50%;
-  margin-left: 25%;
-  justify-content: center;
-  flex-direction: column;
-  display: flex;
 }
 
 .input{
@@ -49,9 +49,9 @@
 
 .filters{
   flex: 1;
-  }
+}
   
-  .list{
+.list{
   flex: 1;
-  }
+}
 

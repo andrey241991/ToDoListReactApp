@@ -5,25 +5,12 @@
   display: flex;
 }
 
-.selected_block__btncheck {
-  flex: 1;
-}
-.selected_block__btnuncheck {
-  flex: 1;
-}
-.selected_block__btndelete {
+.selected_block__button{
   flex: 1;
 }
 
-.selected_block__btncheck:hover {
+.selected_block__button:hover{
   flex: 1;
   cursor: pointer;
 }
-.selected_block__btnuncheck:hover  {
-  flex: 1;
-  cursor: pointer;
-}
-.selected_block__btndelete:hover {
-  flex: 1;
-  cursor: pointer;
-}
+
