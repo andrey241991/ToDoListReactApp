@@ -33,30 +33,25 @@ class Filters extends Component {
     return (
     <div className="filters">
         <div className = "filters_block"
-         id="filters_block__filter1"
          onClick={this.showAll}
          >
          SHOW ALL
          </div>
         <div className = "filters_block"
-         id="filters_block__filter2"
          onClick={()=>this.filterByCompletedAndActiveTasks(false)}
          >
          SHOW ACTIVE
          </div>
         <div className = "filters_block"
-         id="filters_block__filter3"
          onClick={()=>this.filterByCompletedAndActiveTasks(true)}
          >
          SHOW COMPLETED
          </div>
         <div className = "filters_block" 
-         id="filters_block__filter4"
         onClick={this.filterByTitle}
         >SORT BY A-Z
         </div>
         <div className = "filters_block" 
-         id="filters_block__filter5"
         onClick={this.filterByOrigin}
         >
         SORT BY ORIGIN
