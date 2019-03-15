@@ -3,7 +3,6 @@ import "./List.css";
 import { FORMERR } from "dns";
 
 class List extends Component {
-
   state = {
     listOfTasks: this.props.listOfTasks,
     edittedText: ""
@@ -15,7 +14,7 @@ class List extends Component {
   };
 
   removeTask = itemTask => {
-    const {fromParentChangeListOfTasks} = this.props;
+    const { fromParentChangeListOfTasks } = this.props;
     fromParentChangeListOfTasks(itemTask);
   };
 
@@ -35,98 +34,90 @@ class List extends Component {
     this.editTask(item);
   };
 
-     EditedListElement = (item) => (
-      <div  
-        key={item.data} 
-        className={item.isCompleted 
-          ? "item--completed" 
-          : "item--notcompleted"}
-        >
-          <li
-            className={item.isSelected 
-              ? "item--selected" 
-              : "item--notselected"}
-          >
+  EditedListElement = item => (
+    <section
+        key={item.data}
+        className={item.isCompleted ? 
+        "list_item--completed " : 
+        "list_item--not-completed "}
+    >
+        <li 
+            className={item.isSelected ? 
+            "list_item--selected " : 
+            "list_item--not-selected "}>
             <input
-              className="item__input"
-              maxLength="40"
-              onChange={this.handleEditChange}
+                className="list_item__input"
+                maxLength="40"
+                onChange={this.handleEditChange}
             />
-            <div 
-              className="buttons_block"
-              >
-              <button
-               className="button_block__savebtn"
-               onClick={() => this.saveTaskChanges(item)}
-              >
-              Save
-              </button>
-              <button
-               className="button_block__cancelbtn"
-               onClick={() => this.editTask(item)}
-              >
-              Cancel
-              </button>
+            <div className="list_item_block">
+                <button
+                    className="list_item__button list_item_block__button-save"
+                    onClick={() => this.saveTaskChanges(item)}
+                >
+                    Save
+                </button>
+                <button
+                    className="list_item__button list_item_block__button-cancel"
+                    onClick={() => this.editTask(item)}
+                >
+                    Cancel
+                </button>
             </div>
-          </li>
-     </div>
-    )
+      </li>
+    </section>
+  );
 
-     ListElement = (item) => (
-        <div 
-        key={item.data} 
-        className={item.isCompleted 
-          ? "item--completed" 
-          : "item--notcompleted"}
-        >
-          <li
-            className={item.isSelected 
-              ? "item--selected" 
-              : "item--notselected"}
-          >
+  ListElement = item => (
+    <section
+        key={item.data}
+        className={item.isCompleted ? 
+        "list_item list_item--completed " : 
+        "list_item list_item--not-completed "}
+    >
+      <li 
+          className={item.isSelected ? 
+          "list_item list_item--selected" : 
+          "list_item list_item--not-selected "}>
             <input
-              className="item__checkbox"
-              type="checkbox"
-              onClick={() => this.setTaskChecked(item)}
+                className="list_item__checkbox"
+                type="checkbox"
+                onClick={() => this.setTaskChecked(item)}
             />
             {item.title}
-            <div
-             className="buttons_block">
-              <button 
-              className="buttons_block__editbtn"
-              onClick={() => this.editTask(item)}
-              >
-              Edit
-              </button>
-              <button
-               className="buttons_block__removebtn"
-               onClick={() => this.removeTask(item)}
-               >
-               Remove
-               </button>
-              <button 
-              className="buttons_block__donebtn"
-              onClick={() => this.setTaskChecked(item)}
-              >
-              Done
-              </button>
+            <div className="list_item__block">
+                <button
+                    className="list_item__button list_item_block__button-edit"
+                    onClick={() => this.editTask(item)}
+                >
+                    Edit
+                </button>
+                <button
+                    className="list_item__button list_item_block__button-remove"
+                    onClick={() => this.removeTask(item)}
+                >
+                    Remove
+                </button>
+                <button
+                    className="list_item__button list_item_block__button-done"
+                    onClick={() => this.setTaskChecked(item)}
+                >
+                    Done
+                </button>
             </div>
-          </li>
-        </div>
-      )
-   
+     </li>
+    </section>
+  );
 
-    render() {
-    const {listOfTasks} = this.props;
+  render() {
+    const { listOfTasks } = this.props;
     return (
-      <ol 
-      className="list"
-      >
+      <ol className="list">
         {listOfTasks.map(item => {
           if (item.isEdit) {
-           return this.EditedListElement(item)
+            return this.EditedListElement(item);
           } else {
-           return this.ListElement(item)
+            return this.ListElement(item);
           }
         })}
       </ol>

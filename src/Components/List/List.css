@@ -3,20 +3,58 @@
   flex-basis: 60%;
 }
 
-.item--completed {
+.list_item__block{
+  float: right;
+  align-items: rigth;
+}
+
+.list_item__input{
+  width: 60%;
+}
+
+.list_item--completed  {
   text-decoration: line-through;
 }
 
-.item--notcompleted {
+.list_item--not-completed {
   text-decoration: none;
 }
 
-.item--selected {	
+.list_item--selected  {	
   background: #808080;
 }
 
-.item--notselected {
+.list_item--not-selected {
   background: #FEFEFE;
+}
+
+.list_item_block__button-edit{
+
+}
+
+.list_item_block__button-remove{
+
+}
+
+.list_item_block__button-done {
+
+}
+
+.list_item_block__button-save {
+
+}
+
+.list_item_block__button-cancel{
+
+}
+
+.list_item__button{
+  margin: 2px;
+}
+
+.list_item__button:hover{
+  margin: 2px;
+  cursor: pointer;
 }
 
 li{
@@ -24,49 +62,6 @@ li{
   border: gray solid 1px;
   padding: 5px;
   margin: 2px;
-}
-
-button {
-  margin: 2px;
-}
-
-.buttons_block{
-  float: right;
-  align-items: rigth;
-}
-
-.item__input{
-  width: 60%;
-}
+} 
 
 
-.buttons_block__editbtn{}
-
-.buttons_block__removebtn{}
-
-.buttons_block__donebtn{}
-
-.button_block__savebtn{}
-
-.button_block__cancelbtn{}
-
-
-.buttons_block__editbtn:hover{
-  cursor: pointer;
-}
-
-.buttons_block__removebtn:hover{
-  cursor: pointer;
-}
-
-.buttons_block__donebtn:hover{
-  cursor: pointer;
-}
-
-.button_block__savebtn:hover{
-  cursor: pointer;
-}
-
-.button_block__cancelbtn:hover{
-  cursor: pointer;
-}

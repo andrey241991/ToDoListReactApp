@@ -24,28 +24,28 @@ class Selected extends Component {
 
   render() {
     return (
-      <div className="selected">
+      <section className="selected">
         <div className="selected_block"> 
           <button
-          className="selected_block__btncheck"
-          onClick={() => this.setChecked(true)}
+              className="selected_block__btn-check selected_block__button"
+              onClick={() => this.setChecked(true)}
           >
-          CHECK ALL
+              CHECK ALL
           </button>
           <button 
-          className="selected_block__btnuncheck"
-          onClick={() => this.setChecked(false)}
+              className="selected_block__btn-uncheck selected_block__button"
+              onClick={() => this.setChecked(false)}
           >
-          UNCHECK ALL
+              UNCHECK ALL
           </button>
           <button
-          className="selected_block__btndelete"
-          onClick={this.deleteSelected}
+              className="selected_block__btn-delete selected_block__button"
+              onClick={this.deleteSelected}
           >
-          DELETE SELECTED
+              DELETE SELECTED
           </button>
         </div>
-      </div>
+      </section>
     );
   }
 }

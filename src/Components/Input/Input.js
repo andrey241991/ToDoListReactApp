@@ -7,8 +7,8 @@ class Input extends Component {
   };
 
   addNewTask = () => {
-    const {handlerFromParantAddNewTask} = this.props;
-    const {title} = this.state;
+    const { handlerFromParantAddNewTask } = this.props;
+    const { title } = this.state;
     let newTask = {
       title: title,
       data: +new Date(),
@@ -26,24 +26,24 @@ class Input extends Component {
 
   render() {
     return (
-      <div className="input">
-        <input
-          className="input__input"
-          maxLength="40"
-          onChange={this.handleInputChange}
-          onKeyPress={event => {
-            if (event.key === 'Enter') {
-              this.addNewTask();
-            }
-          }
-        }
-        />
-        <button className="input__btnadd" 
-        onClick={this.addNewTask}
-        >
-          ADD
-        </button>
-      </div>
+      <section className="input">
+          <input
+              className="input__input"
+              maxLength="40"
+              onChange={this.handleInputChange}
+              onKeyPress={event => {
+                if (event.key === 'Enter') {
+                  this.addNewTask();
+                }
+               }
+              }
+           />
+           <button 
+              className="input__button-add" 
+              onClick={this.addNewTask}>
+              ADD
+          </button>
+      </section>
     );
   }
 }

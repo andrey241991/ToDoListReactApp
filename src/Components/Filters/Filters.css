@@ -2,7 +2,7 @@
   flex-basis: 40%;
 }
 
-.filters_block {
+.block {
   font-size: 1em;
   text-align: center;
   border: gray solid 1px;
@@ -10,50 +10,48 @@
   margin: 4px;
 }
 
-#filters_block__filter1 {
+.block:nth-child(1){
   background: orangered;
 }
 
-#filters_block__filter2 {
+.block:nth-child(2){
   background: greenyellow;
 }
 
-#filters_block__filter3 {
+.block:nth-child(3){
   background: plum;
 }
 
-#filters_block__filter4 {
+.block:nth-child(4){
   background: paleturquoise;
 }
 
-#filters_block__filter5 {
+.block:nth-child(5){
   background: blueviolet;
 }
 
-
-#filters_block__filter1:hover {
+.block:nth-child(1):hover {
   background: orangered;
   cursor: pointer;
 }
 
-#filters_block__filter2:hover {
+.block:nth-child(2):hover {
   background: greenyellow;
   cursor: pointer;
 }
 
-#filters_block__filter3:hover {
+.block:nth-child(3):hover {
   background: plum;
   cursor: pointer;
 }
 
-#filters_block__filter4:hover {
+.block:nth-child(4):hover {
   background: paleturquoise;
   cursor: pointer;
 }
 
-#filters_block__filter5:hover {
+.block:nth-child(5):hover {
   background: blueviolet;
   cursor: pointer;
 }
-
 
