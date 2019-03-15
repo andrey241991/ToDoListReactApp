@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-import "./App.css";
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
 import Header from "./Components/Header/Header";
 import Input from "./Components/Input/Input";
 import List from "./Components/List/List";
