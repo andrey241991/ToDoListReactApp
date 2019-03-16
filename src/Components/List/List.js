@@ -20,7 +20,9 @@ class List extends Component {
 
   editTask = item => {
     item.isEdit = !item.isEdit;
-    this.forceUpdate();
+    this.setState({
+      edittedText: item.title
+    });
   };
 
   handleEditChange = event => {
@@ -46,6 +48,7 @@ class List extends Component {
             "list_item--selected " : 
             "list_item--not-selected "}>
             <input
+                value={this.state.edittedText}
                 className="list_item__input"
                 maxLength="40"
                 onChange={this.handleEditChange}
