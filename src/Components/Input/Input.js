@@ -11,8 +11,8 @@ class Input extends Component {
     const { title } = this.state;
     if(Validator.validate(title)){
       this.createNewTask();
-      if(e.key === "Enter"){     
-        this.clearInput(e);
+      if(e.key === "Enter"){                //input clear only if enter button clicked, will be fixed soon
+        this.clearInput(e);     
       }
     }else{
       alert('Input field can not be empty');
