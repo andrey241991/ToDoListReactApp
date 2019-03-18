@@ -93,7 +93,7 @@ class List extends Component {
           "list_item list_item--selected" : 
           "list_item list_item--not-selected "}>
             <input
-                className="list_item__checkbox"  //посатвить ветвелнеи как раньше
+                className="list_item__checkbox" 
                 type="checkbox"
                 checked={item.isCompleted}
                 onClick={() => this.setTaskChecked(item)}
