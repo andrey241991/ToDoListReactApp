@@ -7,13 +7,11 @@ class Input extends Component {
     title: "",
   };
 
-  addNewTask = e => {
+  addNewTask = () => {
     const { title } = this.state;
     if(Validator.validate(title)){
       this.createNewTask();
-      if(e.key === "Enter"){                //input clear only if enter button clicked, will be fixed soon
-        this.clearInput(e);     
-      }
+      this.clearInput();
     }else{
       alert('Input field can not be empty');
     }
@@ -33,9 +31,9 @@ class Input extends Component {
       handlerFromParantAddNewTask(newTask);
   }
 
-  clearInput = e => {
-    e.currentTarget.value = "";
+  clearInput = () => {
     this.state.title = "";
+    document.getElementById('input__input-id').value = '';
   };
 
   handleInputChange = event => {
@@ -46,12 +44,13 @@ class Input extends Component {
     return (
       <section className="input">
         <input
+          id="input__input-id"
           className="input__input"
           maxLength="40"
           onChange={this.handleInputChange}
           onKeyPress={event => {
             if (event.key === "Enter") {
-              this.addNewTask(event);
+              this.addNewTask();
             }
           }}
         />

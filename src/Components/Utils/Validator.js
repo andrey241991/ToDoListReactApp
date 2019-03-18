@@ -7,9 +7,7 @@ class Validator{
         }else{
             return true;
         }
-
     }
-
 }
 
 export default Validator;

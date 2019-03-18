@@ -85,7 +85,7 @@ class App extends Component {
   };
 
   deleteSelected = tasksToDelete =>{
-    const {listOfTasks, listOfTasksToShowOnOnePage, currentPage} = this.state;
+    const {listOfTasks} = this.state;
     let newListOfTasks = [];
 
     for(let i = 0; i<listOfTasks.length; i++){
@@ -95,9 +95,9 @@ class App extends Component {
         }
       }
    
-      this.setState({
-          listOfTasks: newListOfTasks
-        });
+    this.setState({
+        listOfTasks: newListOfTasks
+      });
   }
    
 
