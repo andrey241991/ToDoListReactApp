@@ -15,7 +15,8 @@ class App extends Component {
     showSortedTasks: false,
     currentPage: 0,
     listOfTasksToShowOnOnePage: [],
-    showTasksOnOnePage: false
+    showTasksOnOnePage: false,
+    selectedIds:[]
   };
 
   addNewTaskToList = newTask => {
@@ -25,9 +26,9 @@ class App extends Component {
     });
   };
 
-  changeListOfTasks = newListOfTasks => {
+  setSelected = selectedIds => {  
     this.setState({
-      listOfTasks: newListOfTasks
+      selectedIds : selectedIds 
     });
   };
 
@@ -83,8 +84,25 @@ class App extends Component {
     this.setSorted(true);
   };
 
+  deleteSelected = tasksToDelete =>{
+    const {listOfTasks, listOfTasksToShowOnOnePage, currentPage} = this.state;
+    let newListOfTasks = [];
+
+    for(let i = 0; i<listOfTasks.length; i++){
+        let currentTask = listOfTasks[i];
+        if (!tasksToDelete.find(el => el.data === currentTask.data)) {
+          newListOfTasks.push(currentTask);
+        }
+      }
+   
+      this.setState({
+          listOfTasks: newListOfTasks
+        });
+  }
+   
+
   render() {
-    const { currentPage, showSortedTasks, sortedListOfTasks } = this.state;
+    const { currentPage, showSortedTasks, sortedListOfTasks, selectedIds} = this.state;
     let listOfTasks;
     if (showSortedTasks) {
       listOfTasks = sortedListOfTasks;
@@ -104,7 +122,8 @@ class App extends Component {
                 <Selected
                   className="selected"
                   listOfTasks={listOfTasks}
-                  fromParentChangeListOfTasks={this.changeListOfTasks}
+                  fromParentSetSelected={this.setSelected}
+                  fromParentDeleteTasks={this.deleteSelected}
                 />
             </div>
             <div className="app_container_bottom">      
@@ -118,6 +137,7 @@ class App extends Component {
                     <List
                         className="list"
                         listOfTasks={listOfTasks}
+                        selectedIds={selectedIds}
                         fromParentChangeListOfTasks={this.removeTask}
                     />
                 </div>

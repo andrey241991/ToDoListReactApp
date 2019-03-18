@@ -2,45 +2,61 @@ import React, { Component } from "react";
 import "./Selected.css";
 
 class Selected extends Component {
-  
-  setChecked = checked => {
-    const {fromParentChangeListOfTasks, listOfTasks} = this.props;
-    for (let value of listOfTasks) {
-      value.isSelected = checked;
+
+  state = {
+    selectedIds: []
+  };
+
+  setSelected = (selected) => {
+    const {listOfTasks} = this.props;
+    let selectedIds = [];
+    if(selected){
+      for (let value of listOfTasks) {
+        selectedIds.push(value.data);
+      }
     }
-    fromParentChangeListOfTasks(this.props.listOfTasks);
+
+    this.setState({
+      selectedIds:selectedIds
+    })
+
+    this.props.fromParentSetSelected(selectedIds);
   };
 
   deleteSelected = () => {
-    const {fromParentChangeListOfTasks, listOfTasks} = this.props;
-    let newTasks = [];
+    const {selectedIds} = this.state;
+    const {listOfTasks} = this.props;
+    let tasksToDelete = [];
+
     for (let value of listOfTasks) {
-      if (!value.isSelected) {
-        newTasks.push(value);
+      if(selectedIds.includes(value.data)){
+        tasksToDelete.push(value);
       }
     }
-    fromParentChangeListOfTasks(newTasks);
-  };
+    this.props.fromParentDeleteTasks(tasksToDelete);
+    //this.props.fromParentDeleteTasks(selectedIds);
+  }
 
   render() {
+    const {fromParentsetSelected, fromParentDeleteSelected} = this.props;
     return (
       <section className="selected">
         <div className="selected_block"> 
           <button
               className="selected_block__btn-check selected_block__button"
-              onClick={() => this.setChecked(true)}
+              onClick={()=>this.setSelected(true)}
           >
               CHECK ALL
           </button>
           <button 
               className="selected_block__btn-uncheck selected_block__button"
-              onClick={() => this.setChecked(false)}
+              onClick={()=>this.setSelected(false)}
           >
               UNCHECK ALL
           </button>
           <button
               className="selected_block__btn-delete selected_block__button"
-              onClick={this.deleteSelected}
+              onClick={()=>this.deleteSelected()}
           >
               DELETE SELECTED
           </button>

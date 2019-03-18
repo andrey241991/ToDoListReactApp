@@ -28,7 +28,6 @@ class Input extends Component {
         data: +new Date(),
         isActive: true,
         isCompleted: false,
-        isSelected: false,
         isEdit: false
       };
       handlerFromParantAddNewTask(newTask);

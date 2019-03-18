@@ -5,7 +5,8 @@ import { FORMERR } from "dns";
 class List extends Component {
   state = {
     listOfTasks: this.props.listOfTasks,
-    edittedText: ""
+    edittedText: "",
+    selectedIds: this.props.selectedIds
   };
 
   setTaskChecked = item => {
@@ -36,6 +37,15 @@ class List extends Component {
     this.editTask(item);
   };
 
+  setSelected = data => {
+    const {selectedIds} = this.props;
+    if(selectedIds.includes(data)){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   EditedListElement = item => (
     <section
         key={item.data}
@@ -44,7 +54,7 @@ class List extends Component {
         "list_item--not-completed "}
     >
         <li 
-            className={item.isSelected ? 
+            className={this.props.selected ? 
             "list_item--selected " : 
             "list_item--not-selected "}>
             <input
@@ -75,11 +85,11 @@ class List extends Component {
     <section
         key={item.data}
         className={item.isCompleted ? 
-        "list_item list_item--completed " : 
+        "list_item list_item--completed " :  
         "list_item list_item--not-completed "}
     >
       <li 
-          className={item.isSelected ? 
+          className={this.setSelected(item.data) ? 
           "list_item list_item--selected" : 
           "list_item list_item--not-selected "}>
             <input
