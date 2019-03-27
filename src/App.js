@@ -10,13 +10,17 @@ import Pagination from "./Components/Pagination/Pagination";
 
 class App extends Component {
   state = {
-    listOfTasks: [],
-    sortedListOfTasks: [],
-    showSortedTasks: false,
+    generalListOfTasks:[],
+    changedListOfTasks:[],
     currentPage: 0,
-    listOfTasksToShowOnOnePage: [],
-    showTasksOnOnePage: false,
-    selectedIds:[]
+    selectedIds:[],
+    pagesCount:0
+
+    // listOfTasks: [],
+    // sortedListOfTasks: [],
+    // showSortedTasks: false,
+    // listOfTasksToShowOnOnePage: [],
+    // showTasksOnOnePage: false,
   };
 
   addNewTaskToList = newTask => {
@@ -102,13 +106,7 @@ class App extends Component {
    
 
   render() {
-    const { currentPage, showSortedTasks, sortedListOfTasks, selectedIds} = this.state;
-    let listOfTasks;
-    if (showSortedTasks) {
-      listOfTasks = sortedListOfTasks;
-    } else {
-      listOfTasks = this.setListOfTasksToShowOnOnePage();
-    }
+    const { currentPage, generalListOfTasks, changedListOfTasks, selectedIds, pagesCount} = this.state;
 
     return (
       <div className="app">
@@ -121,7 +119,7 @@ class App extends Component {
                 />
                 <Selected
                   className="selected"
-                  listOfTasks={listOfTasks}
+                  listOfTasks={changedListOfTasks}
                   fromParentSetSelected={this.setSelected}
                   fromParentDeleteTasks={this.deleteSelected}
                 />
@@ -130,22 +128,22 @@ class App extends Component {
                 <div className="app_container_bottom__container">
                     <Filters
                         className="filters"
-                        listOfTasks={this.setListOfTasksToShowOnOnePage()}
+                        listOfTasks={changedListOfTasks}
                         fromParentAddSortedListOfTasks={this.addSortedListOfTasks}
                         fromParentShowNotSortedListOfTasks={() => this.setSorted(false)}
                     />
                     <List
                         className="list"
-                        listOfTasks={listOfTasks}
+                        listOfTasks={changedListOfTasks}
                         selectedIds={selectedIds}
                         fromParentChangeListOfTasks={this.removeTask}
                     />
                 </div>
                 <Pagination
                     className="pagination"
-                    fromParentSetCurrentPage={this.setCurrentPage}
-                    listOfTasks={this.state.listOfTasks}
+                    pagesCount = {pagesCount}
                     currentPage={currentPage}
+                    fromParentSetCurrentPage={this.setCurrentPage}
                 />
             </div>
         </div>
