@@ -35,14 +35,11 @@ class Pagination extends Component {
     }
   };
 
-
-
   render() {
-    //comment
-    const {pagesCount, currentPage} = this.props;
+    const {generalListOfTasks} = this.props;
     const {tasksPerPage, PREV_BUTTON_CLICK, NEXT_BUTTON_CLICK, currentPage} = this.state;
     let pagesCount = [];
-    for (let i = 0; i < Math.ceil(listOfTasks.length / tasksPerPage); i++) {
+    for (let i = 0; i < Math.ceil(generalListOfTasks.length / tasksPerPage); i++) {
       pagesCount.push(
         <li className={currentPage === i ?
           "item__title--checked" : 
@@ -54,7 +51,7 @@ class Pagination extends Component {
       );
     }
     
-    if (listOfTasks.length > tasksPerPage) {
+    if (generalListOfTasks.length > tasksPerPage) {
       return (
         <section className="pagination">
             <button

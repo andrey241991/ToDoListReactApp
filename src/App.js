@@ -7,6 +7,8 @@ import List from "./Components/List/List";
 import Selected from "./Components/Selected/Selected";
 import Filters from "./Components/Filters/Filters";
 import Pagination from "./Components/Pagination/Pagination";
+import {SetChangedTasks} from "./Components/Utils/ChangeHelper";
+import {GetSortedTasks} from "./Components/Utils/ChangeHelper";
 
 class App extends Component {
   state = {
@@ -14,39 +16,32 @@ class App extends Component {
     changedListOfTasks:[],
     currentPage: 0,
     selectedIds:[],
-    pagesCount:0
-
-    // listOfTasks: [],
-    // sortedListOfTasks: [],
-    // showSortedTasks: false,
-    // listOfTasksToShowOnOnePage: [],
-    // showTasksOnOnePage: false,
+    filterTasksBy: {by:''}
   };
 
-  addNewTaskToList = newTask => {
-    const { listOfTasks } = this.state;
-    this.setState({
-      listOfTasks: [...listOfTasks, newTask]
-    });
-  };
+  addNewTask = newTaskTitle => {
+    const {generalListOfTasks} = this.state;
+    let newTask = {
+      title: newTaskTitle,
+      data: +new Date(),
+      isCompleted: false,
+    };
+    generalListOfTasks.push(newTask);
 
-  setSelected = selectedIds => {  
-    this.setState({
-      selectedIds : selectedIds 
-    });
+    this.setChangedTasks(); 
   };
 
   removeTask = itemForRemove => {
-    const { listOfTasks, currentPage } = this.state;
+    const {generalListOfTasks, currentPage } = this.state;
     let newTasks = [];
-    for (let value of listOfTasks) {
+    for (let value of generalListOfTasks) {
       if (value.data !== itemForRemove.data) {
         newTasks.push(value);
       }
     }
     this.setState({
-      listOfTasks: newTasks
-    });
+      generalListOfTasks: newTasks
+    }, ()=> this.setChangedTasks());
 
     if (newTasks == 10) {
       this.setState({
@@ -58,56 +53,68 @@ class App extends Component {
   setCurrentPage = currentPage => {
     this.setState({
       currentPage: currentPage
-    });
-    this.setSorted(false);
+    }, ()=> this.setChangedTasks());
   };
 
-  setListOfTasksToShowOnOnePage() {
-    const { listOfTasks, currentPage } = this.state;
-    let firstTask = currentPage * 10;
-    let lastTask = firstTask + 10;
+  clickOnSelectAll = () =>{
+    const {changedListOfTasks} = this.state;
+    let selectedIds = [];
+    for (let value of changedListOfTasks) {
+      selectedIds.push(value.data);
+    }
+    this.setState({
+      selectedIds : selectedIds 
+    }, ()=> this.setChangedTasks());
+  
+  }
+
+  clickOnUnSelectAll = () =>{
+    let selectedIds = [];
+    this.setState({
+      selectedIds : selectedIds 
+    }, ()=> this.setChangedTasks());
+  }
+
+  clickOnDeleteSelected = () =>{
+    const {selectedIds, generalListOfTasks, filterTasksBy} = this.state;
+    let tasksToDelete = [];
     let newListOfTasks = [];
-    for (let i = 0; i < listOfTasks.length; i++) {
-      if (i >= firstTask && i < lastTask) {
-        newListOfTasks.push(listOfTasks[i]);
+    for (let value of generalListOfTasks) {
+      if(selectedIds.includes(value.data)){
+        tasksToDelete.push(value);
       }
     }
-    return newListOfTasks;
-  }
 
-  setSorted = sorted => {
-    this.setState({
-      showSortedTasks: sorted
-    });
-  };
-
-  addSortedListOfTasks = sortedListOfTasks => {
-    this.setState({
-      sortedListOfTasks: sortedListOfTasks
-    });
-    this.setSorted(true);
-  };
-
-  deleteSelected = tasksToDelete =>{
-    const {listOfTasks} = this.state;
-    let newListOfTasks = [];
-
-    for(let i = 0; i<listOfTasks.length; i++){
-        let currentTask = listOfTasks[i];
-        if (!tasksToDelete.find(el => el.data === currentTask.data)) {
-          newListOfTasks.push(currentTask);
-        }
+    for(let i = 0; i<generalListOfTasks.length; i++){
+      let currentTask = generalListOfTasks[i];
+      if (!tasksToDelete.find(el => el.data === currentTask.data)) {
+        newListOfTasks.push(currentTask);
       }
-   
+    }
+ 
     this.setState({
-        listOfTasks: newListOfTasks
-      });
+      generalListOfTasks: newListOfTasks
+    }, ()=> this.setChangedTasks());
+ 
   }
-   
+
+  filterTasks = filterTasksBy =>{
+    this.setState({
+      filterTasksBy : filterTasksBy
+    }, ()=> this.setChangedTasks());
+  }
+
+  setChangedTasks = () =>{
+    const {generalListOfTasks, currentPage, filterTasksBy} = this.state;
+    let newChangedTasks = SetChangedTasks(generalListOfTasks, filterTasksBy, currentPage);
+
+    this.setState({
+      changedListOfTasks : newChangedTasks
+    })
+  }
 
   render() {
-    const { currentPage, generalListOfTasks, changedListOfTasks, selectedIds, pagesCount} = this.state;
-
+    const {generalListOfTasks, changedListOfTasks, selectedIds, filterTasksBy} = this.state;
     return (
       <div className="app">
         <Header className="header" />
@@ -115,36 +122,33 @@ class App extends Component {
             <div className="app_container_top">
                 <Input
                   className="input"
-                  handlerFromParantAddNewTask={this.addNewTaskToList}
+                  fromParantAddNewTask={this.addNewTask}
                 />
                 <Selected
                   className="selected"
-                  listOfTasks={changedListOfTasks}
-                  fromParentSetSelected={this.setSelected}
-                  fromParentDeleteTasks={this.deleteSelected}
+                  fromParentClickOnSelectAll={this.clickOnSelectAll}
+                  fromParentClickOnUnSelectAll={this.clickOnUnSelectAll}
+                  fromParentClickOnDeleteSelected={this.clickOnDeleteSelected}
                 />
             </div>
             <div className="app_container_bottom">      
                 <div className="app_container_bottom__container">
                     <Filters
                         className="filters"
-                        listOfTasks={changedListOfTasks}
-                        fromParentAddSortedListOfTasks={this.addSortedListOfTasks}
-                        fromParentShowNotSortedListOfTasks={() => this.setSorted(false)}
+                        fromParentfilterTasks={this.filterTasks}
                     />
                     <List
                         className="list"
-                        listOfTasks={changedListOfTasks}
+                        changedListOfTasks={changedListOfTasks}   
                         selectedIds={selectedIds}
                         fromParentChangeListOfTasks={this.removeTask}
                     />
                 </div>
                 <Pagination
                     className="pagination"
-                    pagesCount = {pagesCount}
-                    currentPage={currentPage}
+                    generalListOfTasks={GetSortedTasks(generalListOfTasks, filterTasksBy)}
                     fromParentSetCurrentPage={this.setCurrentPage}
-                />
+                /> 
             </div>
         </div>
       </div>

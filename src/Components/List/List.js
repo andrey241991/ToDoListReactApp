@@ -4,9 +4,8 @@ import { FORMERR } from "dns";
 
 class List extends Component {
   state = {
-    listOfTasks: this.props.listOfTasks,
     edittedText: "",
-    selectedIds: this.props.selectedIds
+    editItems:[]
   };
 
   setTaskChecked = item => {
@@ -20,7 +19,8 @@ class List extends Component {
   };
 
   editTask = item => {
-    item.isEdit = !item.isEdit;
+    this.state.editItems.push(item.data);
+    console.log(this.state.editItems.length);
     this.setState({
       edittedText: item.title
     });
@@ -33,8 +33,18 @@ class List extends Component {
   };
 
   saveTaskChanges = item => {
+    const {editItems} = this.state;
     item.title = this.state.edittedText;
-    this.editTask(item);
+    let newEditItems = [];
+
+    for(let i=0; i<editItems.length; i++){
+        if(editItems[i] !==item.data){
+          newEditItems.push(editItems[i]);
+        }
+    }
+    this.setState({
+      editItems: newEditItems
+    });
   };
 
   setSelected = data => {
@@ -46,6 +56,16 @@ class List extends Component {
     }
   }
 
+  checkIfEdit = data =>{
+    const {editItems} = this.state;
+    if(editItems.includes(data)){
+      return true;
+    }else{
+      return false;
+    }
+
+  }
+
   EditedListElement = item => (
     <section
         key={item.data}
@@ -54,7 +74,7 @@ class List extends Component {
         "list_item--not-completed "}
     >
         <li 
-            className={this.props.selected ? 
+            className={this.setSelected(item.data) ? 
             "list_item--selected " : 
             "list_item--not-selected "}>
             <input
@@ -124,11 +144,11 @@ class List extends Component {
   );
 
   render() {
-    const { listOfTasks } = this.props;
+    const {changedListOfTasks, selectedIds} = this.props;
     return (
       <ol className="list">
-        {listOfTasks.map(item => {
-          if (item.isEdit) {
+        {changedListOfTasks.map(item => {
+          if (this.checkIfEdit(item.data)) {
             return this.EditedListElement(item);
           } else {
             return this.ListElement(item);

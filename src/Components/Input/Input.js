@@ -18,22 +18,14 @@ class Input extends Component {
   };
 
   createNewTask(){
-    const { handlerFromParantAddNewTask } = this.props;
+    const { fromParantAddNewTask } = this.props;
     const { title } = this.state;
-
-     let newTask = {
-        title: title,
-        data: +new Date(),
-        isActive: true,
-        isCompleted: false,
-        isEdit: false
-      };
-      handlerFromParantAddNewTask(newTask);
+    fromParantAddNewTask(title);
   }
 
   clearInput = () => {
-    this.state.title = "";
-    document.getElementById('input__input-id').value = '';
+     this.setState({ title: ''});
+     document.getElementById('input__input-id').value = '';
   };
 
   handleInputChange = event => {
