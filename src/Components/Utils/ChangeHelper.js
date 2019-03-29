@@ -64,7 +64,11 @@ function sortTasks(generalTasks, filterTasksBy){
 }
 
 function setPagination(newTasks, currentPage){
-   let firstTask = currentPage * 10;
+   let firstTask = 0;
+   if(currentPage >0){
+      firstTask = currentPage * 10;
+   }
+   
    let lastTask = firstTask + 10;
    let newListOfTasks = [];
    for (let i = 0; i < newTasks.length; i++) {

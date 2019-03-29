@@ -37,7 +37,12 @@ class Pagination extends Component {
 
   render() {
     const {generalListOfTasks} = this.props;
-    const {tasksPerPage, PREV_BUTTON_CLICK, NEXT_BUTTON_CLICK, currentPage} = this.state;
+    const {
+      tasksPerPage,
+      PREV_BUTTON_CLICK,
+      NEXT_BUTTON_CLICK,
+      currentPage
+    } = this.state;
     let pagesCount = [];
     for (let i = 0; i < Math.ceil(generalListOfTasks.length / tasksPerPage); i++) {
       pagesCount.push(

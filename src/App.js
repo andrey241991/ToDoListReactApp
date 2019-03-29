@@ -76,27 +76,27 @@ class App extends Component {
   }
 
   clickOnDeleteSelected = () =>{
-    const {selectedIds, generalListOfTasks, filterTasksBy} = this.state;
-    let tasksToDelete = [];
+    const {selectedIds, generalListOfTasks, currentPage} = this.state;
+   
     let newListOfTasks = [];
     for (let value of generalListOfTasks) {
-      if(selectedIds.includes(value.data)){
-        tasksToDelete.push(value);
+      if(!selectedIds.includes(value.data)){
+        newListOfTasks.push(value);
       }
     }
 
-    for(let i = 0; i<generalListOfTasks.length; i++){
-      let currentTask = generalListOfTasks[i];
-      if (!tasksToDelete.find(el => el.data === currentTask.data)) {
-        newListOfTasks.push(currentTask);
-      }
-    }
- 
     this.setState({
       generalListOfTasks: newListOfTasks
     }, ()=> this.setChangedTasks());
- 
+    console.log(newListOfTasks);
+
+    if (newListOfTasks.length <= 10) {
+      this.setState({
+        currentPage: currentPage - 1
+      });
+    }
   }
+    
 
   filterTasks = filterTasksBy =>{
     this.setState({
