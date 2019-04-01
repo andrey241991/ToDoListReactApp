@@ -9,15 +9,23 @@ import Filters from "./Components/Filters/Filters";
 import Pagination from "./Components/Pagination/Pagination";
 import {SetChangedTasks} from "./Components/Utils/ChangeHelper";
 import {GetSortedTasks} from "./Components/Utils/ChangeHelper";
+ import defaultItems from "./Components/DefaultItems/DefaultItems.js";
 
 class App extends Component {
-  state = {
-    generalListOfTasks:[],
-    changedListOfTasks:[],
-    currentPage: 0,
-    selectedIds:[],
-    filterTasksBy: {by:''}
-  };
+
+  constructor(props) {
+    super(props);
+    this.stopLoadingAfterDelay();
+    this.state = {
+      generalListOfTasks:defaultItems,
+      changedListOfTasks:[],
+      currentPage: 0,
+      selectedIds:[],
+      filterTasksBy: {by:''},
+      isLoading:true
+    };
+  }
+  
 
   addNewTask = newTaskTitle => {
     const {generalListOfTasks} = this.state;
@@ -27,7 +35,6 @@ class App extends Component {
       isCompleted: false,
     };
     generalListOfTasks.push(newTask);
-
     this.setChangedTasks(); 
   };
 
@@ -127,46 +134,76 @@ class App extends Component {
     })
   }
 
+  stopLoadingAfterDelay = () =>{
+    let LoadingPromise = new Promise((resolve, reject) =>{
+       setTimeout(resolve, 2000);
+      })
+    
+    const finishLoading = () =>{
+        this.setState({
+          isLoading:false
+        })
+    }
+   
+    function showError(e){
+        console.log( 'error', e)
+    }
+    
+    LoadingPromise.then(finishLoading)
+                  .catch(showError);
+  }
+
+
   render() {
-    const {generalListOfTasks, changedListOfTasks, selectedIds, filterTasksBy} = this.state;
-    return (
-      <div className="app">
-        <Header className="header" />
-        <div className="app_container">
-            <div className="app_container_top">
-                <Input
-                  className="input"
-                  fromParantAddNewTask={this.addNewTask}
-                />
-                <Selected
-                  className="selected"
-                  fromParentClickOnSelectAll={this.clickOnSelectAll}
-                  fromParentClickOnUnSelectAll={this.clickOnUnSelectAll}
-                  fromParentClickOnDeleteSelected={this.clickOnDeleteSelected}
-                />
-            </div>
-            <div className="app_container_bottom">      
-                <div className="app_container_bottom__container">
-                    <Filters
-                        className="filters"
-                        fromParentfilterTasks={this.filterTasks}
-                    />
-                    <List
-                        className="list"
-                        changedListOfTasks={changedListOfTasks}   
-                        selectedIds={selectedIds}
-                        fromParentChangeListOfTasks={this.removeTask}
-                    />
-                </div>
-                <Pagination
-                    className="pagination"
-                    generalListOfTasks={GetSortedTasks(generalListOfTasks, filterTasksBy)}
-                    fromParentSetCurrentPage={this.setCurrentPage}
-                /> 
-            </div>
+    const {generalListOfTasks, changedListOfTasks, selectedIds, filterTasksBy, isLoading} = this.state;
+    if(isLoading){
+      return (
+        <div className="app">
+          <h2 className="mySpinner">  
+            <span>Loading...</span>
+          </h2>
         </div>
-      </div>
-    );
+      );
+    }else{
+      return (
+        <div className="app">
+          <Header className="header" />
+          <div className="app_container">
+              <div className="app_container_top">
+                  <Input
+                    className="input"
+                    fromParantAddNewTask={this.addNewTask}
+                  />
+                  <Selected
+                    className="selected"
+                    fromParentClickOnSelectAll={this.clickOnSelectAll}
+                    fromParentClickOnUnSelectAll={this.clickOnUnSelectAll}
+                    fromParentClickOnDeleteSelected={this.clickOnDeleteSelected}
+                  />
+              </div>
+              <div className="app_container_bottom">      
+                  <div className="app_container_bottom__container">
+                      <Filters
+                          className="filters"
+                          fromParentfilterTasks={this.filterTasks}
+                      />
+                      <List
+                          className="list"
+                          changedListOfTasks={changedListOfTasks}   
+                          selectedIds={selectedIds}
+                          fromParentChangeListOfTasks={this.removeTask}
+                      />
+                  </div>
+                  <Pagination
+                      className="pagination"
+                      generalListOfTasks={GetSortedTasks(generalListOfTasks, filterTasksBy)}
+                      fromParentSetCurrentPage={this.setCurrentPage}
+                  /> 
+              </div>
+          </div>
+        </div>
+      );
+    }
   }
 }
 
