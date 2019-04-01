@@ -33,22 +33,36 @@ class App extends Component {
 
   removeTask = itemForRemove => {
     const {generalListOfTasks, currentPage } = this.state;
-    let newTasks = [];
+    let newListOfTasks = [];
     for (let value of generalListOfTasks) {
       if (value.data !== itemForRemove.data) {
-        newTasks.push(value);
+        newListOfTasks.push(value);
       }
     }
     this.setState({
-      generalListOfTasks: newTasks
+      generalListOfTasks: newListOfTasks
     }, ()=> this.setChangedTasks());
 
-    if (newTasks == 10) {
-      this.setState({
-        currentPage: currentPage - 1
-      });
-    }
+    this.goToPreviousPage(newListOfTasks);
+
+    // if (newListOfTasks.length <= 10) {
+    //   this.setState({
+    //     currentPage: currentPage - 1
+    //   });
+    // }
   };
+
+  // goToPreviousPage = (newListOfTasks) =>{
+  //   const {generalListOfTasks, currentPage } = this.state;
+  //   console.log("goToPreviousPage call");
+  //   let result = newListOfTasks.length - currentPage * 10;
+
+  //   if (result <= 10) {
+  //     this.setState({
+  //       currentPage: currentPage - 1
+  //     });
+  //   }
+  // }
 
   setCurrentPage = currentPage => {
     this.setState({

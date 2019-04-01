@@ -5,7 +5,6 @@ class Pagination extends Component {
   state = {
     currentPage: 0,
     tasksPerPage: 10,
-    generalPagesCount: 0,
     PREV_BUTTON_CLICK: 100,
     NEXT_BUTTON_CLICK: 200
   };

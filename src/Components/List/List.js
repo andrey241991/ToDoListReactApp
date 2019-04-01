@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import "./List.css";
 import { FORMERR } from "dns";
+import ListItem from "../LIstItem/ListItem";
 
 class List extends Component {
   state = {
     edittedText: "",
-    editItems:[]
+    editItems:[],
+    editedObjects:[]
   };
 
   setTaskChecked = item => {
@@ -24,6 +26,9 @@ class List extends Component {
     this.setState({
       edittedText: item.title
     });
+
+    this.state.editedObjects.push({data:item.data, edittedText:this.state.edittedText});
+
   };
 
   handleEditChange = event => {
@@ -149,9 +154,9 @@ class List extends Component {
       <ol className="list">
         {changedListOfTasks.map(item => {
           if (this.checkIfEdit(item.data)) {
-            return this.EditedListElement(item);
+            return ListItem;
           } else {
-            return this.ListElement(item);
+            return <ListItem/>;
           }
         })}
       </ol>
@@ -160,3 +165,9 @@ class List extends Component {
 }
 
 export default List;
+
+
+// <Input
+//                  className="input"
+///                  fromParantAddNewTask={this.addNewTask}
+//                /> */}
