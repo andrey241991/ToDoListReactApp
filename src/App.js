@@ -43,7 +43,7 @@ class App extends Component {
       generalListOfTasks: newListOfTasks
     }, ()=> this.setChangedTasks());
 
-    this.goToPreviousPage(newListOfTasks);
+    //this.goToPreviousPage(newListOfTasks);
 
     // if (newListOfTasks.length <= 10) {
     //   this.setState({
