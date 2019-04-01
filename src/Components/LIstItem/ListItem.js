@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import "./ListItem.css";
 
 class ListItem extends Component{
     state = {
         edittedItem:false,
-        edittedText: ''
+        edittedText: '',
+        showButtons:false
       };
 
     editTask = item => {
@@ -98,7 +100,7 @@ class ListItem extends Component{
           <li 
               className={this.setSelected(item.data) ? 
               "list_item list_item--selected" : 
-              "list_item list_item--not-selected "}>
+              "list_item list_item--not-selected"}>
                 <input
                     className="list_item__checkbox" 
                     type="checkbox"

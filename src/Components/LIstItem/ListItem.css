@@ -1,0 +1,74 @@
+.list_item__block{
+    float: right;
+    align-items: rigth;
+  }
+  
+  .list_item__input{
+    width: 60%;
+  }
+  
+  .list_item--completed .list_item__block  {
+    text-decoration: line-through;
+    display: none;
+  }
+
+  .list_item--completed :hover .list_item__block  {
+    text-decoration: line-through;
+    display: block;
+  }
+
+  .list_item--not-completed .list_item__block {
+    text-decoration: none;
+    display: none;
+  }
+
+  .list_item--not-completed :hover .list_item__block  {
+    text-decoration: none;
+    display: block;
+  }
+  
+  .list_item--selected  {	
+    background: #808080;
+  }
+  
+  .list_item--not-selected {
+    background: #FEFEFE;
+  }
+  
+  .list_item_block__button-edit{
+  
+  }
+  
+  .list_item_block__button-remove{
+  
+  }
+  
+  .list_item_block__button-done {
+  
+  }
+  
+  .list_item_block__button-save {
+  
+  }
+  
+  .list_item_block__button-cancel{
+  
+  }
+  
+  .list_item__button{
+    margin: 2px;
+  }
+  
+  .list_item__button:hover{
+    margin: 2px;
+    cursor: pointer;
+  }
+  
+  li{
+    box-sizing: content-box;
+    border: gray solid 1px;
+    padding: 5px;
+    margin: 2px;
+  } 
+
+  

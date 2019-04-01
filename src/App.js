@@ -25,7 +25,6 @@ class App extends Component {
       isLoading:true
     };
   }
-  
 
   addNewTask = newTaskTitle => {
     const {generalListOfTasks} = this.state;
@@ -128,7 +127,6 @@ class App extends Component {
   setChangedTasks = () =>{
     const {generalListOfTasks, currentPage, filterTasksBy} = this.state;
     let newChangedTasks = SetChangedTasks(generalListOfTasks, filterTasksBy, currentPage);
-
     this.setState({
       changedListOfTasks : newChangedTasks
     })
