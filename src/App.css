@@ -1,17 +1,48 @@
 .app {
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: column;flex-direction: column;
 }
 
 .app_container_top{
-  height: 80px;
+  height: 105px;
   width: 50%;
   margin-left: 25%;
   justify-content: center;
   flex-direction: column;
   display: flex;
 }
+
+.search{
+  margin-top: 5px;
+  display: flex;
+  flex: 1.2;
+}
+
+.input{
+  margin-top: 2px;
+  display: flex;
+  flex: 1;
+}
+
+.inner_container{
+  width: 20%;
+  display: flex;
+  margin-top: 2px;
+  flex: 1;
+  flex-direction: row;
+
+}
+
+.inner_container__selected{
+  flex: 1;
+}
+
+
+.inner_container__tasks-counter-selector{
+  flex: 1;
+}
+
 
 .app_container_bottom{
   display: flex;
@@ -31,19 +62,6 @@
 
 .pagination{
   margin-left: 35%;
-  flex: 1;
-}
-
-.input{
-  margin-top: 5px;
-  height: 30px;
-  display: flex;
-  flex: 1;
-}
-
-.selected{
-  display: flex;
-  margin-top: 5px;
   flex: 1;
 }
 

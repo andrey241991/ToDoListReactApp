@@ -3,18 +3,12 @@ import "./Pagination.css";
 
 class Pagination extends Component {
   state = {
-    currentPage: 0,
-    tasksPerPage: 10,
     PREV_BUTTON_CLICK: 100,
     NEXT_BUTTON_CLICK: 200
   };
 
   passPageToParent = page => {
-    console.log("page", page);
     const { fromParentSetCurrentPage } = this.props;
-    this.setState({
-      currentPage: page
-    });
     fromParentSetCurrentPage(page);
   };
 
@@ -22,12 +16,12 @@ class Pagination extends Component {
     const { PREV_BUTTON_CLICK, NEXT_BUTTON_CLICK } = this.state;
     switch (buttonPressed) {
       case PREV_BUTTON_CLICK:
-        if (currentPage > 0 && currentPage <= pagesCount) {
+        if (currentPage > 1 && currentPage <= pagesCount) {
           this.passPageToParent(--currentPage);
         }
         break;
       case NEXT_BUTTON_CLICK:
-        if (currentPage >= 0 && currentPage < pagesCount - 1) {
+        if (currentPage >= 1 && currentPage < pagesCount ) {
           this.passPageToParent(++currentPage);
         }
         break;
@@ -35,56 +29,50 @@ class Pagination extends Component {
   };
 
   render() {
-    const {generalListOfTasks} = this.props;
-    const {
-      tasksPerPage,
-      PREV_BUTTON_CLICK,
-      NEXT_BUTTON_CLICK,
-      currentPage
-    } = this.state;
-    let pagesCount = [];
-    for (let i = 0; i < Math.ceil(generalListOfTasks.length / tasksPerPage); i++) {
-      pagesCount.push(
-        <li className={currentPage === i ?
-          "item__title--checked" : 
-          "item__title"}
-           onClick={() => this.passPageToParent(i)}
-        >
-            {i}
-        </li>
-      );
+    const {generalListOfTasks, currentPage, tasksCount} = this.props;
+    const {PREV_BUTTON_CLICK, NEXT_BUTTON_CLICK} = this.state;
+    let generalPageCount = Math.ceil(generalListOfTasks / tasksCount);
+    let lcurrentPage = currentPage;
+
+    if(lcurrentPage>generalPageCount){            //If after sorting\searching current page becoming bigger then general pages count
+      lcurrentPage = generalPageCount;            //than I returned to last page from general pages count        
+      this.passPageToParent(lcurrentPage)         
     }
-    
-    if (generalListOfTasks.length > tasksPerPage) {
+
+      let pagesCount = [];
+      for (let i = 1; i <= generalPageCount; i++) {
+        pagesCount.push(
+          <li className={lcurrentPage === i ?
+            "item__title--checked" : 
+            "item__title"}
+             onClick={() => this.passPageToParent(i)}
+          >
+            {i}
+          </li>
+        );
+      }
+ 
+    if(generalPageCount > 1){
       return (
         <section className="pagination">
             <button
-                className="pagination__button-prev"
-                onClick={() =>
-                this.onChangePageClick(
-                PREV_BUTTON_CLICK,
-                currentPage,
-                pagesCount.length)}
+               className="pagination__button-prev"
+               onClick={() => this.onChangePageClick(PREV_BUTTON_CLICK, lcurrentPage, pagesCount.length)}
             >
-                PREV
+            PREV
             </button>
-            <h2>{pagesCount}</h2>
+              <h2>{pagesCount}</h2>
             <button
-                className="pagination__button-next"
-                onClick={() =>
-                this.onChangePageClick(
-                NEXT_BUTTON_CLICK,
-                currentPage,
-                pagesCount.length)}
+              className="pagination__button-next"
+              onClick={() => this.onChangePageClick(NEXT_BUTTON_CLICK, lcurrentPage, pagesCount.length)}
             >
-                NEXT
+            NEXT
             </button>
         </section>
       );
-    } else {
+    }else{
       return <section className="pagination" />;
     }
   }
 }
-
 export default Pagination;

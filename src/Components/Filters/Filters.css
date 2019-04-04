@@ -55,3 +55,15 @@
   cursor: pointer;
 }
 
+.block__arrow {
+  transition: all 0.2s;
+  font-size: 2em;
+  color: black;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.block__arrow--flip{
+  transform: rotate(180deg);
+}
+

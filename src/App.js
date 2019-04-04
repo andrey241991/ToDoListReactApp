@@ -7,9 +7,12 @@ import List from "./Components/List/List";
 import Selected from "./Components/Selected/Selected";
 import Filters from "./Components/Filters/Filters";
 import Pagination from "./Components/Pagination/Pagination";
+import Search from "./Components/Search/Search";
+import TasksCountSelector from "./Components/TasksCountSelector/TasksCountSelector";
 import {SetChangedTasks} from "./Components/Utils/ChangeHelper";
 import {GetSortedTasks} from "./Components/Utils/ChangeHelper";
- import defaultItems from "./Components/DefaultItems/DefaultItems.js";
+import defaultItems from "./Components/DefaultItems/DefaultItems.js";
+
 
 class App extends Component {
 
@@ -19,10 +22,12 @@ class App extends Component {
     this.state = {
       generalListOfTasks:defaultItems,
       changedListOfTasks:[],
-      currentPage: 0,
+      currentPage: 1,
       selectedIds:[],
       filterTasksBy: {by:''},
-      isLoading:true
+      isLoading:true,
+      searchedText:'',
+      tasksCount:10
     };
   }
 
@@ -48,33 +53,34 @@ class App extends Component {
     this.setState({
       generalListOfTasks: newListOfTasks
     }, ()=> this.setChangedTasks());
-
-    //this.goToPreviousPage(newListOfTasks);
-
-    // if (newListOfTasks.length <= 10) {
-    //   this.setState({
-    //     currentPage: currentPage - 1
-    //   });
-    // }
   };
-
-  // goToPreviousPage = (newListOfTasks) =>{
-  //   const {generalListOfTasks, currentPage } = this.state;
-  //   console.log("goToPreviousPage call");
-  //   let result = newListOfTasks.length - currentPage * 10;
-
-  //   if (result <= 10) {
-  //     this.setState({
-  //       currentPage: currentPage - 1
-  //     });
-  //   }
-  // }
 
   setCurrentPage = currentPage => {
     this.setState({
       currentPage: currentPage
     }, ()=> this.setChangedTasks());
   };
+
+  selectTasksCount = (tasksCount) =>{
+    this.setState({
+      tasksCount: tasksCount
+    }, ()=> this.setChangedTasks());
+  }
+
+  selectAction = (selectedAction) =>{
+      switch(selectedAction){
+          case "100":
+          {this.clickOnSelectAll()}
+          break;
+          case "200":
+           this.clickOnUnSelectAll();
+          break;
+          case "300":
+           this.clickOnDeleteSelected();
+          break;
+      }
+  }
+ 
 
   clickOnSelectAll = () =>{
     const {changedListOfTasks} = this.state;
@@ -97,7 +103,6 @@ class App extends Component {
 
   clickOnDeleteSelected = () =>{
     const {selectedIds, generalListOfTasks, currentPage} = this.state;
-   
     let newListOfTasks = [];
     for (let value of generalListOfTasks) {
       if(!selectedIds.includes(value.data)){
@@ -117,7 +122,6 @@ class App extends Component {
     }
   }
     
-
   filterTasks = filterTasksBy =>{
     this.setState({
       filterTasksBy : filterTasksBy
@@ -125,19 +129,29 @@ class App extends Component {
   }
 
   setChangedTasks = () =>{
-    const {generalListOfTasks, currentPage, filterTasksBy} = this.state;
-    let newChangedTasks = SetChangedTasks(generalListOfTasks, filterTasksBy, currentPage);
+    const {generalListOfTasks, currentPage, filterTasksBy, searchedText, tasksCount} = this.state;
+
+    let newChangedTasks = SetChangedTasks(generalListOfTasks, filterTasksBy, currentPage, searchedText, tasksCount);
+    console.log(newChangedTasks);
     this.setState({
       changedListOfTasks : newChangedTasks
     })
   }
 
+  searchByTitle = searchedText =>{
+    console.log({searchedText});
+    this.setState({
+      searchedText : searchedText
+    }, ()=> this.setChangedTasks());
+  }
+  
   stopLoadingAfterDelay = () =>{
     let LoadingPromise = new Promise((resolve, reject) =>{
-       setTimeout(resolve, 2000);
+       setTimeout(resolve, 200);
       })
     
     const finishLoading = () =>{
+      this.setChangedTasks();
         this.setState({
           isLoading:false
         })
@@ -153,7 +167,11 @@ class App extends Component {
 
 
   render() {
-    const {generalListOfTasks, changedListOfTasks, selectedIds, filterTasksBy, isLoading} = this.state;
+    const {generalListOfTasks, changedListOfTasks, selectedIds, filterTasksBy, isLoading, currentPage, tasksCount, 
+      searchedText } = this.state;
+
+    let tasksLengthForPagination = GetSortedTasks(generalListOfTasks, filterTasksBy, searchedText);
+
     if(isLoading){
       return (
         <div className="app">
@@ -168,16 +186,24 @@ class App extends Component {
           <Header className="header" />
           <div className="app_container">
               <div className="app_container_top">
+                  <Search
+                     className='search'
+                     fromParantSearchByTitle={this.searchByTitle}    
+                  />
                   <Input
                     className="input"
                     fromParantAddNewTask={this.addNewTask}
                   />
-                  <Selected
-                    className="selected"
-                    fromParentClickOnSelectAll={this.clickOnSelectAll}
-                    fromParentClickOnUnSelectAll={this.clickOnUnSelectAll}
-                    fromParentClickOnDeleteSelected={this.clickOnDeleteSelected}
+                   <div className="inner_container">
+                   <Selected
+                    className=".inner_container__selected"
+                    fromParentSelect={this.selectAction}
                   />
+                  <TasksCountSelector
+                    className="inner_container__tasks-counter-selector"
+                    fromParentselectTasksCount={this.selectTasksCount}
+                  />
+                  </div>
               </div>
               <div className="app_container_bottom">      
                   <div className="app_container_bottom__container">
@@ -194,7 +220,9 @@ class App extends Component {
                   </div>
                   <Pagination
                       className="pagination"
-                      generalListOfTasks={GetSortedTasks(generalListOfTasks, filterTasksBy)}
+                      generalListOfTasks={tasksLengthForPagination}
+                      currentPage = {currentPage}
+                      tasksCount = {tasksCount}
                       fromParentSetCurrentPage={this.setCurrentPage}
                   /> 
               </div>

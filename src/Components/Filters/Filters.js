@@ -3,40 +3,37 @@ import './Filters.css';
 
 class Filters extends Component {
 
-
+    state = {
+        sortByTitleUp:false,
+        sortByOriginUp:false
+    }
 
     filterTasks = filterTasksBy =>{
     const{fromParentfilterTasks} = this.props;
+    const{sortByTitleUp, sortByOriginUp} = this.state;
+
+    switch(filterTasksBy.by){
+        case 'title':
+            this.setState({
+                sortByTitleUp :!sortByTitleUp
+            })
+            filterTasksBy.sortUp = !sortByTitleUp;
+        break;
+        case 'origin':
+            this.setState({
+                sortByOriginUp :!sortByOriginUp
+            })
+            filterTasksBy.sortUp = !sortByOriginUp;
+        break;
+     }
+
     fromParentfilterTasks(filterTasksBy);
   }
 
-  // showAll = () => {
-  //   const{fromParentShowNotSortedListOfTasks} = this.props;
-  //   fromParentShowNotSortedListOfTasks();
-  // }
-
-  // filterByCompletedAndActiveTasks = (isCompleted) => {
-  //   const{fromParentAddSortedListOfTasks} = this.props;
-  //   let newTasks = [];
-  //   for (let value of this.props.listOfTasks) {
-  //     if (value.isCompleted === isCompleted) {
-  //       newTasks.push(value);
-  //     }
-  //   }
-  //   fromParentAddSortedListOfTasks(newTasks);
-  // }
-
-  // filterByTitle = () => {  
-  //   const{fromParentAddSortedListOfTasks, listOfTasks} = this.props;
-  //   fromParentAddSortedListOfTasks(listOfTasks.sort((a, b) => a.title.localeCompare(b.title)));
-  // }
-
-  // filterByOrigin = () => {  
-  //   const{fromParentAddSortedListOfTasks, listOfTasks} = this.props;
-  //   fromParentAddSortedListOfTasks(listOfTasks.sort((a, b) =>a.data - b.data));
-  // }
-
   render() {
+    const {sortByTitleUp, sortByOriginUp} = this.state;
+    let titleText = sortByTitleUp ? "SORT BY Z-A" : "SORT BY A-Z" 
+
     return (
     <aside className="filters">
         <div 
@@ -52,25 +49,23 @@ class Filters extends Component {
             SHOW ACTIVE
         </div>
         <div 
-           className="filters__block block block--show-completed" 
-      //     onClick={()=>this.filterByCompletedTasks(true)}
-             onClick={()=> this.filterTasks({by:'complitedTasks'})}
+            className="filters__block block block--show-completed" 
+            onClick={()=> this.filterTasks({by:'complitedTasks'})}
         >
             SHOW COMPLETED
         </div>
         <div 
             className="filters__block block block--sort-by-alphabet" 
-           // onClick={this.filterByTitle}
-           onClick={()=> this.filterTasks({by:'title'})}
+            onClick={()=> this.filterTasks({by:'title'})}
         >
-            SORT BY A-Z
+              {titleText}
         </div>
         <div 
             className="filters__block block block--sort-by-origin" 
-           // onClick={this.filterByOrigin}
-           onClick={()=> this.filterTasks({by:'origin'})}
+            onClick={()=> this.filterTasks({by:'origin'})}
         >
             SORT BY ORIGIN
+            <span className={`block__arrow ${sortByOriginUp ? "block__arrow--flip" : ""  }`}>&uarr;</span>
         </div>
     </aside>
     );

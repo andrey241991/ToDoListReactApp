@@ -1,15 +1,32 @@
 
-const SetChangedTasks = (generalTasks, filterTasksBy, currentPage) => {
+const SetChangedTasks = (generalTasks, filterTasksBy, currentPage, searchedText, tasksCount) => {
+   console.log('tasksCount = ' + tasksCount + 'tasksCount type = ' + typeof(tasksCount));
    let newTasks = [];
-   newTasks = sortTasks(generalTasks, filterTasksBy);
-   newTasks = setPagination(newTasks, currentPage);
+   newTasks = searchByTitle(generalTasks, searchedText);
+   newTasks = sortTasks(newTasks, filterTasksBy);
+   newTasks = setPagination(newTasks, currentPage, tasksCount);
    return newTasks;
 }
 
-const GetSortedTasks = (generalTasks, filterTasksBy) => {
+const GetSortedTasks = (generalTasks, filterTasksBy, searchedText) => {
    let newTasks = [];
-   newTasks = sortTasks(generalTasks, filterTasksBy);
-   return newTasks;
+   newTasks = searchByTitle(generalTasks, searchedText);
+   newTasks = sortTasks(newTasks, filterTasksBy);
+   return newTasks.length;
+}
+
+function searchByTitle(generalTasks, searchedText){
+   if(searchedText.length < 2){
+      return generalTasks;
+   }
+
+   let newTasks = [];
+   for(let value of generalTasks){
+      if(value.title.toLowerCase().includes(searchedText.toLowerCase())){
+         newTasks.push(value);
+      }
+   }
+   return newTasks.length > 0 ? newTasks : generalTasks;
 }
 
 function sortTasks(generalTasks, filterTasksBy){   
@@ -39,10 +56,16 @@ function sortTasks(generalTasks, filterTasksBy){
 
    function filterByTitle(){  
       sortedTasks = clonedTasks.sort((a, b) => a.title.localeCompare(b.title));
+      if(filterTasksBy.sortUp){
+         sortedTasks = sortedTasks.reverse();
+      }
    }
 
    function filterByOrigin(){
       sortedTasks = clonedTasks.sort((a, b) =>a.data - b.data);
+      if(filterTasksBy.sortUp){
+         sortedTasks = sortedTasks.reverse();
+      }
    }
 
    function filterByComplited(){
@@ -63,20 +86,9 @@ function sortTasks(generalTasks, filterTasksBy){
    return sortedTasks;
 }
 
-function setPagination(newTasks, currentPage){
-   let firstTask = 0;
-   if(currentPage >0){
-      firstTask = currentPage * 10;
-   }
-   
-   let lastTask = firstTask + 10;
-   let newListOfTasks = [];
-   for (let i = 0; i < newTasks.length; i++) {
-      if (i >= firstTask && i < lastTask) {
-        newListOfTasks.push(newTasks[i]);
-      }
-    }
-    return newListOfTasks;
+function setPagination(newTasks, currentPage, tasksCount){
+   currentPage--;
+   return newTasks.slice(currentPage * tasksCount, (currentPage + 1) * tasksCount);
 }
 
 export {SetChangedTasks, GetSortedTasks}

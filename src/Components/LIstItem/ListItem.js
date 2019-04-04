@@ -94,8 +94,8 @@ class ListItem extends Component{
         <section
             key={item.data}
             className={item.isCompleted ? 
-            "list_item list_item--completed " :  
-            "list_item list_item--not-completed "}
+            "list_item list_item--completed" :  
+            "list_item list_item--not-completed"}
         >
           <li 
               className={this.setSelected(item.data) ? 
