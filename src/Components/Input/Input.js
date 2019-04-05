@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Input.css';
-import Validator from '..\\Utils\\Validator';
+import Validator from '../Utils/Validator';
 
 class Input extends Component {
   state = {

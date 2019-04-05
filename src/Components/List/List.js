@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './List.css';
-import ListItem from '../LIstItem/ListItem';
+import ListItem from '../ListItem/ListItem';
 
 class List extends Component {
 
