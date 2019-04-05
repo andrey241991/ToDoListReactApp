@@ -1,0 +1,53 @@
+{
+	"parser": "babel-eslint",
+	"env": {
+			"browser": true,
+			"es6": true
+	},
+	"globals": {
+			"React": true,
+			"ReactDOM": true,
+			"CSSModules":true,
+			"eventSystem":true,
+			"process":true,
+			"Stripe":true
+	},
+	"extends": ["eslint:recommended", "plugin:react/recommended"],
+	"parserOptions": {
+			"ecmaFeatures": {
+					"experimentalObjectRestSpread": true,
+					"legacyDecorators": true,
+					"jsx": true
+			},
+			"sourceType": "module"
+	},
+	"plugins": [
+			"react"
+	],
+	"rules": {
+		"react/prop-types": 0,
+			"no-undef":0,
+			"no-console":0,
+			"no-empty":0,
+			"react/display-name": [0, { "ignoreTranspilerName": true }],
+			"indent": [
+					"error",
+					2
+			],
+			"linebreak-style": 0,
+			"quotes": [
+					"error",
+					"single"
+			],
+			"semi": [
+					"error",
+					"always"
+			]
+	},
+	"settings": {
+			"react": {
+					"version": "16.7.0"
+			}
+	}
+}
+

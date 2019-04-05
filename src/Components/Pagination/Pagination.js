@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import "./Pagination.css";
+import React, { Component } from 'react';
+import './Pagination.css';
 
 class Pagination extends Component {
   state = {
@@ -15,16 +15,16 @@ class Pagination extends Component {
   onChangePageClick = (buttonPressed, currentPage, pagesCount) => {
     const { PREV_BUTTON_CLICK, NEXT_BUTTON_CLICK } = this.state;
     switch (buttonPressed) {
-      case PREV_BUTTON_CLICK:
-        if (currentPage > 1 && currentPage <= pagesCount) {
-          this.passPageToParent(--currentPage);
-        }
-        break;
-      case NEXT_BUTTON_CLICK:
-        if (currentPage >= 1 && currentPage < pagesCount ) {
-          this.passPageToParent(++currentPage);
-        }
-        break;
+    case PREV_BUTTON_CLICK:
+      if (currentPage > 1 && currentPage <= pagesCount) {
+        this.passPageToParent(--currentPage);
+      }
+      break;
+    case NEXT_BUTTON_CLICK:
+      if (currentPage >= 1 && currentPage < pagesCount ) {
+        this.passPageToParent(++currentPage);
+      }
+      break;
     }
   };
 
@@ -36,38 +36,38 @@ class Pagination extends Component {
 
     if(lcurrentPage>generalPageCount){            //If after sorting\searching current page becoming bigger then general pages count
       lcurrentPage = generalPageCount;            //than I returned to last page from general pages count        
-      this.passPageToParent(lcurrentPage)         
+      this.passPageToParent(lcurrentPage);         
     }
 
-      let pagesCount = [];
-      for (let i = 1; i <= generalPageCount; i++) {
-        pagesCount.push(
-          <li className={lcurrentPage === i ?
-            "item__title--checked" : 
-            "item__title"}
-             onClick={() => this.passPageToParent(i)}
-          >
-            {i}
-          </li>
-        );
-      }
+    let pagesCount = [];
+    for (let i = 1; i <= generalPageCount; i++) {
+      pagesCount.push(
+        <li className={lcurrentPage === i ?
+          'item__title--checked' : 
+          'item__title'}
+        onClick={() => this.passPageToParent(i)}
+        >
+          {i}
+        </li>
+      );
+    }
  
     if(generalPageCount > 1){
       return (
         <section className="pagination">
-            <button
-               className="pagination__button-prev"
-               onClick={() => this.onChangePageClick(PREV_BUTTON_CLICK, lcurrentPage, pagesCount.length)}
-            >
+          <button
+            className="pagination__button-prev"
+            onClick={() => this.onChangePageClick(PREV_BUTTON_CLICK, lcurrentPage, pagesCount.length)}
+          >
             PREV
-            </button>
-              <h2>{pagesCount}</h2>
-            <button
-              className="pagination__button-next"
-              onClick={() => this.onChangePageClick(NEXT_BUTTON_CLICK, lcurrentPage, pagesCount.length)}
-            >
+          </button>
+          <h2>{pagesCount}</h2>
+          <button
+            className="pagination__button-next"
+            onClick={() => this.onChangePageClick(NEXT_BUTTON_CLICK, lcurrentPage, pagesCount.length)}
+          >
             NEXT
-            </button>
+          </button>
         </section>
       );
     }else{

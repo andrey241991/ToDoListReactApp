@@ -1,14 +1,13 @@
-import React, { Component } from "react";
-import "./Header.css";
+import './Header.css';
 
 function Header() {
   return (
     <header className="header">
-        <h1 
-            className="header__title"
-        >
+      <h1 
+        className="header__title"
+      >
             TO-DO LIST
-        </h1>
+      </h1>
     </header>
   );
 }

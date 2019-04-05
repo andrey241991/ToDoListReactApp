@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import "./Selected.css";
+import React, { Component } from 'react';
+import './Selected.css';
 
 class Selected extends Component {
 
@@ -7,7 +7,7 @@ class Selected extends Component {
     const {fromParentSelect} = this.props;
     let selectedValue = document.getElementById('selected_block__pages-count-select').value;
     fromParentSelect(selectedValue);
-}
+  }
 
   render() {
     return (

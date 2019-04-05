@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import "./Input.css";
-import Validator from "..\\Utils\\Validator";
+import React, { Component } from 'react';
+import './Input.css';
+import Validator from '..\\Utils\\Validator';
 
 class Input extends Component {
   state = {
-    title: "",
+    title: '',
   };
 
   addNewTask = () => {
@@ -24,8 +24,8 @@ class Input extends Component {
   }
 
   clearInput = () => {
-     this.setState({ title: ''});
-     document.getElementById('input__input-id').value = '';
+    this.setState({ title: ''});
+    document.getElementById('input__input-id').value = '';
   };
 
   handleInputChange = event => {
@@ -41,7 +41,7 @@ class Input extends Component {
           maxLength="40"
           onChange={this.handleInputChange}
           onKeyPress={event => {
-            if (event.key === "Enter") {
+            if (event.key === 'Enter') {
               this.addNewTask();
             }
           }}
