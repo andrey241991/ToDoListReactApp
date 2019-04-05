@@ -106,6 +106,7 @@ class ListItem extends Component{
               type="checkbox"
               checked={item.isCompleted}
               onClick={() => this.setTaskChecked(item)}
+              onChange={() => {}}
             />
             {item.title}
             <div className="list_item__block">
